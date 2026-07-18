@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "ecom-app",
+    "slug": "ecom-app",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "ecomapp",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ecomapp",
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.ecomapp"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/splash-icon.png"
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static",
+            "forceStaticLinking": [
+              "RNFBAnalytics",
+              "RNFBApp",
+              "RNFBAppCheck",
+              "RNFBAuth",
+              "RNFBCrashlytics",
+              "RNFBFirestore",
+              "RNFBMessaging",
+              "RNFBRemoteConfig",
+              "RNFBStorage",
+              "RNFBSomeOtherRNFBModuleYouAreUsing"
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}
