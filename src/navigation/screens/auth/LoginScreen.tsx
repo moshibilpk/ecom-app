@@ -13,12 +13,19 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { GradientButton } from '@components/GradientButton';
-import { InputField } from '@components/InputField';
-import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from '@constants/theme';
-import { ScreenName } from '@constants/ScreenNames';
+import { GradientButton, InputField } from '@components';
+import {
+  BorderRadius,
+  Colors,
+  Gradients,
+  Shadows,
+  Spacing,
+  Typography,
+  ScreenName,
+  FontFamily,
+} from '@constants';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { useAuth } from '@hooks/useAuth';
+import { useAuth } from '@hooks';
 
 export function LoginScreen() {
   const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
@@ -28,7 +35,6 @@ export function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
-  // Floating icon animation
   const [floatAnim] = React.useState(() => new Animated.Value(0));
   React.useEffect(() => {
     Animated.loop(
@@ -194,7 +200,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Typography.xxxl,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
     textAlign: 'center',
     marginBottom: Spacing.sm,
@@ -202,6 +208,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: Typography.base,
     color: Colors.textSecondary,
+    fontFamily: FontFamily.Regular,
     textAlign: 'center',
     marginBottom: Spacing.xxxl,
   },
@@ -224,10 +231,11 @@ const styles = StyleSheet.create({
   bottomText: {
     color: Colors.textSecondary,
     fontSize: Typography.sm,
+    fontFamily: FontFamily.Regular,
   },
   linkText: {
     color: Colors.primary,
     fontSize: Typography.sm,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
   },
 });

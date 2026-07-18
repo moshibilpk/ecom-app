@@ -19,6 +19,7 @@ import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from '@
 import { ScreenName } from '@constants/ScreenNames';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useAuth } from '@hooks/useAuth';
+import { FontFamily } from '@constants';
 
 export function SignupScreen() {
   const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
   plusText: {
     color: Colors.textInverse,
     fontSize: 16,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
     marginTop: -1,
   },
   glowRing: {
@@ -245,7 +246,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Typography.xxxl,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
     textAlign: 'center',
     marginBottom: Spacing.sm,
@@ -253,6 +254,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: Typography.base,
     color: Colors.textSecondary,
+    fontFamily: FontFamily.Regular,
     textAlign: 'center',
     marginBottom: Spacing.xxxl,
   },
@@ -275,10 +277,11 @@ const styles = StyleSheet.create({
   bottomText: {
     color: Colors.textSecondary,
     fontSize: Typography.sm,
+    fontFamily: FontFamily.Regular,
   },
   linkText: {
     color: Colors.primary,
     fontSize: Typography.sm,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
   },
 });

@@ -9,6 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { BorderRadius, Colors, Spacing, Typography } from '@constants/theme';
+import { FontFamily } from '@constants';
 
 interface InputFieldProps extends TextInputProps {
   label: string;
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: Typography.sm,
     color: Colors.textSecondary,
-    fontWeight: Typography.medium,
+    fontFamily: FontFamily.Medium,
     marginBottom: Spacing.xs,
     marginStart: Spacing.sm,
   },
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: Colors.textPrimary,
     fontSize: Typography.base,
-    fontWeight: Typography.regular,
+    fontFamily: FontFamily.Regular,
     paddingVertical: 0,
     height: '100%',
   },
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: Colors.error,
     fontSize: Typography.xs,
-    fontWeight: Typography.medium,
+    fontFamily: FontFamily.Medium,
     marginTop: Spacing.xs,
     marginStart: Spacing.sm,
   },

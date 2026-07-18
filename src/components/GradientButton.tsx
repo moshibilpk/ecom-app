@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from '@constants/theme';
+import { FontFamily } from '@constants';
 
 type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost';
 
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
   },
   gradientText: {
     color: Colors.textInverse,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
     letterSpacing: 0.3,
   },
   outlineButton: {
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
   },
   outlineText: {
     color: Colors.primary,
-    fontWeight: Typography.semiBold,
+    fontFamily: FontFamily.SemiBold,
     letterSpacing: 0.3,
   },
   ghostButton: {
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
   },
   ghostText: {
     color: Colors.textSecondary,
-    fontWeight: Typography.medium,
+    fontFamily: FontFamily.Medium,
   },
   disabled: {
     opacity: 0.5,
