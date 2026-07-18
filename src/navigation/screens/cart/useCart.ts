@@ -1,4 +1,5 @@
 import { Alert } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@store";
 import {
   emptyCart,
@@ -10,16 +11,17 @@ import { getMessaging, getToken } from "@react-native-firebase/messaging";
 import { API_ENDPOINTS } from "@constants";
 
 export function useCart() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectCartItems);
   const itemCount = useAppSelector(selectCartItemCount);
   const total = useAppSelector(selectCartTotal);
 
   const handleEmptyCart = () => {
-    Alert.alert("Empty Cart", "Are you sure you want to remove all items from your cart?", [
-      { text: "Cancel", style: "cancel" },
+    Alert.alert(t("emptyCart"), t("emptyCartConfirm"), [
+      { text: t("cancel"), style: "cancel" },
       {
-        text: "Empty Cart",
+        text: t("emptyCart"),
         style: "destructive",
         onPress: () => dispatch(emptyCart()),
       },
@@ -42,8 +44,11 @@ export function useCart() {
         },
         body: JSON.stringify({
           token,
-          title: "📦 Order Placed successfully!",
-          body: `Your order of ${count} item(s) worth $${totalAmount.toFixed(2)} has been placed successfully!`,
+          title: t("orderPlacedNotificationTitle"),
+          body: t("orderPlacedNotificationBody", {
+            count,
+            total: totalAmount.toFixed(2),
+          }),
           data: {
             type: "order",
           },
@@ -56,11 +61,11 @@ export function useCart() {
 
   const handleCheckout = () => {
     Alert.alert(
-      "🎉 Order Placed!",
-      `Your order of ${itemCount} item(s) worth $${total.toFixed(2)} has been placed successfully!`,
+      t("orderPlaced"),
+      t("orderPlacedBody", { count: itemCount, total: total.toFixed(2) }),
       [
         {
-          text: "Great!",
+          text: t("great"),
           onPress: async () => {
             const currentItemCount = itemCount;
             const currentTotal = total;

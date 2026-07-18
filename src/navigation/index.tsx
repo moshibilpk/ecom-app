@@ -9,6 +9,7 @@ import { Image, StyleSheet, View } from "react-native";
 import { Text } from "@react-navigation/elements";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { useTranslation } from "react-i18next";
 import { persistor, store, useAppSelector } from "@store";
 import { Colors, Typography } from "@constants/theme";
 import { ScreenName } from "@constants/ScreenNames";
@@ -19,6 +20,8 @@ import { selectCartItemCount } from "@store/slices/cartSlice";
 import { selectUnreadCount } from "@store/slices/notificationSlice";
 import { useNotificationService } from "@hooks/useNotificationService";
 import { FontFamily } from "@constants";
+import { LanguageProvider } from "@components";
+import "@language/i18n";
 
 // ──────────────────────────────────────────────
 // Navigators
@@ -99,13 +102,14 @@ const tabScreenOptions: BottomTabNavigationOptions = {
 };
 
 function BottomTabs() {
+  const { t } = useTranslation();
   return (
     <Tab.Navigator screenOptions={tabScreenOptions}>
       <Tab.Screen
         name={ScreenName.Home}
         component={Home}
         options={{
-          title: "Shop",
+          title: t("shop"),
           tabBarIcon: ({ color, size }) => (
             <Image source={newspaper} tintColor={color} style={{ width: size, height: size }} />
           ),
@@ -115,7 +119,7 @@ function BottomTabs() {
         name={ScreenName.Cart}
         component={CartScreen}
         options={{
-          title: "Cart",
+          title: t("cart"),
           tabBarIcon: CartTabIcon,
         }}
       />
@@ -123,7 +127,7 @@ function BottomTabs() {
         name={ScreenName.Notification}
         component={Notification}
         options={{
-          title: "Notifications",
+          title: t("notifications"),
           tabBarIcon: NotificationTabIcon,
         }}
       />
@@ -131,7 +135,7 @@ function BottomTabs() {
         name={ScreenName.Settings}
         component={Settings}
         options={{
-          title: "Settings",
+          title: t("settings"),
           tabBarIcon: ({ color, size }) => <Text style={{ fontSize: size - 4, color }}>⚙️</Text>,
         }}
       />
@@ -165,13 +169,15 @@ export function Navigation(props: { linking: any; onReady: () => void; theme?: a
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer
-          ref={navigationRef}
-          linking={props.linking}
-          onReady={props.onReady}
-          theme={props.theme}>
-          <RootNavigator />
-        </NavigationContainer>
+        <LanguageProvider>
+          <NavigationContainer
+            ref={navigationRef}
+            linking={props.linking}
+            onReady={props.onReady}
+            theme={props.theme}>
+            <RootNavigator />
+          </NavigationContainer>
+        </LanguageProvider>
       </PersistGate>
     </Provider>
   );

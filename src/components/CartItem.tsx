@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import { BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constants";
 import { CartItem as CartItemType } from "@models";
 import { useAppDispatch } from "@store";
@@ -11,6 +12,7 @@ interface CartItemProps {
 }
 
 export function CartItemRow({ item }: CartItemProps) {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const handleIncrement = () => {
@@ -29,7 +31,9 @@ export function CartItemRow({ item }: CartItemProps) {
           {item.product.title}
         </Text>
         <Text style={styles.price}>${(item.product.price * item.quantity).toFixed(2)}</Text>
-        <Text style={styles.unitPrice}>${item.product.price.toFixed(2)} each</Text>
+        <Text style={styles.unitPrice}>
+          ${item.product.price.toFixed(2)} {t("each")}
+        </Text>
       </View>
       <View style={styles.quantityContainer}>
         <TouchableOpacity activeOpacity={0.7} onPress={handleDecrement} style={styles.qtyButton}>

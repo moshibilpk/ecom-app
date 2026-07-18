@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { FlatList, Platform, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import { NotificationItem } from "@components";
 import { Colors, FontFamily, Spacing, Typography } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";
@@ -11,6 +12,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export function Notification() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const notifications = useAppSelector(selectNotifications);
   const unreadCount = useAppSelector(selectUnreadCount);
@@ -34,10 +36,8 @@ export function Notification() {
       <View style={[styles.container, styles.emptyContainer]}>
         <StatusBar barStyle="light-content" />
         <Text style={styles.emptyIcon}>🔔</Text>
-        <Text style={styles.emptyTitle}>No notifications yet</Text>
-        <Text style={styles.emptySubtitle}>
-          {"You'll be notified about orders, deals, and more"}
-        </Text>
+        <Text style={styles.emptyTitle}>{t("noNotificationsTitle")}</Text>
+        <Text style={styles.emptySubtitle}>{t("noNotificationsSubtitle")}</Text>
       </View>
     );
   }
@@ -59,11 +59,11 @@ export function Notification() {
         ListHeaderComponent={
           <View style={styles.headerRow}>
             <Text style={styles.headerTitle}>
-              {unreadCount > 0 ? `${unreadCount} unread` : "All caught up!"}
+              {unreadCount > 0 ? t("unreadCount", { count: unreadCount }) : t("allCaughtUp")}
             </Text>
             {unreadCount > 0 && (
               <Pressable onPress={() => dispatch(markAllAsRead())}>
-                <Text style={styles.markAllText}>Mark all read</Text>
+                <Text style={styles.markAllText}>{t("markAllRead")}</Text>
               </Pressable>
             )}
           </View>

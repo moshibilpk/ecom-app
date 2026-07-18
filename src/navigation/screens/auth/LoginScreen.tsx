@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 import { GradientButton, InputField } from "@components";
 import {
   BorderRadius,
@@ -28,6 +29,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useAuth } from "@hooks";
 
 export function LoginScreen() {
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
   const { login, isLoading } = useAuth();
   const [email, setEmail] = useState("");
@@ -57,15 +59,15 @@ export function LoginScreen() {
     const newErrors: { email?: string; password?: string } = {};
 
     if (!email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = t("emailRequired");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      newErrors.email = "Enter a valid email address";
+      newErrors.email = t("emailInvalid");
     }
 
     if (!password) {
-      newErrors.password = "Password is required";
+      newErrors.password = t("passwordRequired");
     } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+      newErrors.password = t("passwordMinLength");
     }
 
     setErrors(newErrors);
@@ -100,12 +102,12 @@ export function LoginScreen() {
               <View style={styles.glowRing} />
             </Animated.View>
 
-            <Text style={styles.title}>Welcome Back</Text>
-            <Text style={styles.subtitle}>Sign in to continue shopping</Text>
+            <Text style={styles.title}>{t("welcomeBack")}</Text>
+            <Text style={styles.subtitle}>{t("signInContinue")}</Text>
 
             <View style={styles.form}>
               <InputField
-                label="Email"
+                label={t("email")}
                 value={email}
                 onChangeText={setEmail}
                 error={errors.email}
@@ -116,7 +118,7 @@ export function LoginScreen() {
               />
 
               <InputField
-                label="Password"
+                label={t("password")}
                 value={password}
                 onChangeText={setPassword}
                 error={errors.password}
@@ -129,7 +131,7 @@ export function LoginScreen() {
 
               <View style={styles.buttonContainer}>
                 <GradientButton
-                  title="Sign In"
+                  title={t("signIn")}
                   onPress={handleLogin}
                   loading={isLoading}
                   disabled={isLoading}
@@ -140,9 +142,9 @@ export function LoginScreen() {
 
             {/* Bottom Link */}
             <View style={styles.bottomLink}>
-              <Text style={styles.bottomText}>{"Don't have an account?"} </Text>
+              <Text style={styles.bottomText}>{t("noAccountPrompt")} </Text>
               <Pressable onPress={() => navigation.navigate(ScreenName.Signup)}>
-                <Text style={styles.linkText}>Sign Up</Text>
+                <Text style={styles.linkText}>{t("signUp")}</Text>
               </Pressable>
             </View>
           </ScrollView>

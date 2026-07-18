@@ -7,6 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "scheme": "ecomapp",
+    "extra": {
+      "supportsRTL": true
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ecomapp",
@@ -15,9 +18,7 @@
         "aps-environment": "production"
       },
       "infoPlist": {
-        "UIBackgroundModes": [
-          "remote-notification"
-        ]
+        "UIBackgroundModes": ["remote-notification"]
       }
     },
     "android": {
@@ -47,6 +48,7 @@
         {
           "ios": {
             "useFrameworks": "static",
+            "supportsRTL": true,
             "forceStaticLinking": [
               "RNFBAnalytics",
               "RNFBApp",
@@ -59,6 +61,9 @@
               "RNFBStorage",
               "RNFBSomeOtherRNFBModuleYouAreUsing"
             ]
+          },
+          "android": {
+            "supportsRTL": true
           }
         }
       ],
@@ -67,9 +72,7 @@
       [
         "react-native-permissions",
         {
-          "iosPermissions": [
-            "Notifications"
-          ]
+          "iosPermissions": ["Notifications"]
         }
       ]
     ]

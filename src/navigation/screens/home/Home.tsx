@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import { AnimatedPressable, CategoryList, ProductCard } from "@components";
 import {
   PRODUCTS,
@@ -15,6 +16,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { selectCartItemCount } from "@store/slices/cartSlice";
 
 export function Home({ navigation }: any) {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const user = useAppSelector((state) => state.auth.user);
   const cartCount = useAppSelector(selectCartItemCount);
@@ -26,8 +28,10 @@ export function Home({ navigation }: any) {
     <View style={styles.header}>
       <View style={styles.greetingRow}>
         <View style={styles.greetingTextContainer}>
-          <Text style={styles.greeting}>Hey, {user?.username || "there"} 👋</Text>
-          <Text style={styles.subGreeting}>{user?.email || "Welcome to ShopLux"}</Text>
+          <Text style={styles.greeting}>
+            {t("heyUser", { name: user?.username || t("there") })}
+          </Text>
+          <Text style={styles.subGreeting}>{user?.email || t("welcomeToShopLux")}</Text>
         </View>
         <AnimatedPressable style={styles.cartButton} onPress={() => navigation.navigate("Cart")}>
           <Text style={styles.cartIcon}>🛒</Text>
@@ -40,7 +44,7 @@ export function Home({ navigation }: any) {
       </View>
       <CategoryList selectedCategory={selectedCategory} onSelect={setSelectedCategory} />
       <Text style={styles.sectionTitle}>
-        {selectedCategory === "All" ? "Featured Products" : selectedCategory}
+        {selectedCategory === "All" ? t("featuredProducts") : t(selectedCategory.toLowerCase())}
       </Text>
     </View>
   );

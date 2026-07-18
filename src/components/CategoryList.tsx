@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import { CATEGORIES, BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constants";
 import { AnimatedPressable } from "./AnimatedPressable";
 
@@ -13,6 +14,7 @@ function CategoryChip({
   isSelected: boolean;
   onPress: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <AnimatedPressable
       onPress={onPress}
@@ -21,7 +23,9 @@ function CategoryChip({
       enableOpacity={false}
       style={styles.chipWrapper}>
       <View style={isSelected ? styles.chipActive : styles.chipInactive}>
-        <Text style={isSelected ? styles.chipActiveText : styles.chipInactiveText}>{cat}</Text>
+        <Text style={isSelected ? styles.chipActiveText : styles.chipInactiveText}>
+          {t(cat.toLowerCase())}
+        </Text>
       </View>
     </AnimatedPressable>
   );

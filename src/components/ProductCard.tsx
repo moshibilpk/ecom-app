@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "@constants";
 import { Product } from "@models";
 import { useAppDispatch, useAppSelector } from "@store";
@@ -11,6 +12,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const quantity = useAppSelector(
     (state) => state.cart.items.find((i) => i.product.id === product.id)?.quantity || 0,
@@ -59,7 +61,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </View>
         ) : (
           <AnimatedPressable onPress={handleAddToCart} style={styles.addButton}>
-            <Text style={styles.addButtonText}>+ Add to Cart</Text>
+            <Text style={styles.addButtonText}>{t("addToCart")}</Text>
           </AnimatedPressable>
         )}
       </View>
@@ -149,6 +151,7 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: Colors.primary,
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Bold,
     letterSpacing: 0.3,
   },
@@ -175,10 +178,12 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontSize: Typography.md,
     fontFamily: FontFamily.Bold,
+    lineHeight: Typography.lineHeightMd,
   },
   quantityText: {
     color: Colors.textPrimary,
     fontSize: Typography.sm,
     fontFamily: FontFamily.Bold,
+    lineHeight: Typography.lineHeightSm,
   },
 });

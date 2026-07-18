@@ -1,8 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { GradientButton } from "@components";
+import { AnimatedPressable, GradientButton } from "@components";
 import {
   BorderRadius,
   Colors,
@@ -15,7 +15,15 @@ import {
 import { useSettings } from "./useSettings";
 
 export function Settings() {
-  const { user, userInitials, onLogout, handleSendTestNotification } = useSettings();
+  const {
+    t,
+    user,
+    userInitials,
+    currentLanguageName,
+    onLogout,
+    handleSendTestNotification,
+    onSelectLanguage,
+  } = useSettings();
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -30,19 +38,31 @@ export function Settings() {
             <Text style={styles.userEmail}>{user?.email || "Not signed in"}</Text>
           </LinearGradient>
         </View>
+
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Developer Tools</Text>
+          <Text style={styles.sectionTitle}>{t("generalSettings")}</Text>
+          <AnimatedPressable style={styles.settingRow} onPress={onSelectLanguage}>
+            <Text style={styles.settingIcon}>🌐</Text>
+            <Text style={styles.settingLabel}>{t("language")}</Text>
+            <Text style={styles.chevronValue}>{currentLanguageName}</Text>
+            <Text style={styles.chevron}> › </Text>
+          </AnimatedPressable>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t("developerTools")}</Text>
           <GradientButton
-            title="🔔 Send Test Notification"
+            title={"🔔 " + t("sendTestNotification")}
             onPress={handleSendTestNotification}
             variant="secondary"
             size="md"
           />
         </View>
+
         <View style={styles.logoutContainer}>
-          <GradientButton title="Logout" onPress={onLogout} variant="danger" size="md" />
+          <GradientButton title={t("logout")} onPress={onLogout} variant="danger" size="md" />
         </View>
-        <Text style={styles.version}>ShopLux v1.0.0</Text>
+        <Text style={styles.version}>{t("version")} ShopLux v1.0.0</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -124,16 +144,19 @@ const styles = StyleSheet.create({
     flex: 1,
     color: Colors.textPrimary,
     fontSize: Typography.base,
+    lineHeight: Typography.lineHeightBase,
     fontFamily: FontFamily.Medium,
   },
   chevron: {
     color: Colors.textMuted,
     fontSize: Typography.lg,
     fontFamily: FontFamily.Regular,
+    lineHeight: Typography.lineHeightBase,
   },
   chevronValue: {
     color: Colors.textMuted,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightBase,
     fontFamily: FontFamily.Regular,
   },
   logoutContainer: {

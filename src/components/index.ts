@@ -5,3 +5,4 @@ export * from "./InputField";
 export * from "./ProductCard";
 export * from "./CartItem";
 export * from "./NotificationItem";
+export * from "./LanguageProvider";

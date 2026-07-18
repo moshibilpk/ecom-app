@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import { BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constants";
 import { Notification } from "@models";
 import { useAppDispatch } from "@store";
@@ -9,15 +10,15 @@ interface NotificationItemProps {
   notification: Notification;
 }
 
-function formatTimeAgo(timestamp: number): string {
+function formatTimeAgo(timestamp: number, t: any): string {
   const diff = Date.now() - timestamp;
   const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return "Just now";
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 1) return t("justNow");
+  if (minutes < 60) return t("minutesAgo", { count: minutes });
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return t("hoursAgo", { count: hours });
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return t("daysAgo", { count: days });
 }
 
 const TYPE_ICONS: Record<string, string> = {
@@ -29,6 +30,7 @@ const TYPE_ICONS: Record<string, string> = {
 export const NotificationItem = React.memo(function NotificationItem({
   notification,
 }: NotificationItemProps) {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const handlePress = () => {
@@ -57,7 +59,7 @@ export const NotificationItem = React.memo(function NotificationItem({
         <Text style={styles.body} numberOfLines={2}>
           {notification.body}
         </Text>
-        <Text style={styles.timestamp}>{formatTimeAgo(notification.timestamp)}</Text>
+        <Text style={styles.timestamp}>{formatTimeAgo(notification.timestamp, t)}</Text>
       </View>
     </Pressable>
   );

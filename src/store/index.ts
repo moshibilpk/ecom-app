@@ -5,17 +5,19 @@ import { persistReducer, persistStore } from "redux-persist";
 import authReducer from "./slices/authSlice";
 import cartReducer from "./slices/cartSlice";
 import notificationReducer from "./slices/notificationSlice";
+import languageReducer from "./slices/languageSlice";
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["auth", "cart", "notifications"],
+  whitelist: ["auth", "cart", "notifications", "language"],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   notifications: notificationReducer,
+  language: languageReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

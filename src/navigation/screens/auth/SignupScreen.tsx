@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 import { GradientButton } from "@components/GradientButton";
 import { InputField } from "@components/InputField";
 import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from "@constants/theme";
@@ -22,6 +23,7 @@ import { useAuth } from "@hooks/useAuth";
 import { FontFamily } from "@constants";
 
 export function SignupScreen() {
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
   const { signup, isLoading } = useAuth();
   const [email, setEmail] = useState("");
@@ -61,23 +63,23 @@ export function SignupScreen() {
     } = {};
 
     if (!email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = t("emailRequired");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      newErrors.email = "Enter a valid email address";
+      newErrors.email = t("emailInvalid");
     }
 
     if (!username.trim()) {
-      newErrors.username = "Username is required";
+      newErrors.username = t("usernameRequired");
     } else if (username.trim().length < 3) {
-      newErrors.username = "Username must be at least 3 characters";
+      newErrors.username = t("usernameMinLength");
     } else if (!/^[a-zA-Z0-9_]+$/.test(username.trim())) {
-      newErrors.username = "Only letters, numbers, and underscores";
+      newErrors.username = t("usernameInvalid");
     }
 
     if (!password) {
-      newErrors.password = "Password is required";
+      newErrors.password = t("passwordRequired");
     } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
+      newErrors.password = t("passwordMinLength");
     }
 
     setErrors(newErrors);
@@ -118,13 +120,13 @@ export function SignupScreen() {
             </Animated.View>
 
             {/* Title */}
-            <Text style={styles.title}>Create Account</Text>
-            <Text style={styles.subtitle}>Join the premium shopping experience</Text>
+            <Text style={styles.title}>{t("createAccount")}</Text>
+            <Text style={styles.subtitle}>{t("joinExperience")}</Text>
 
             {/* Form */}
             <View style={styles.form}>
               <InputField
-                label="Email"
+                label={t("email")}
                 value={email}
                 onChangeText={setEmail}
                 error={errors.email}
@@ -135,7 +137,7 @@ export function SignupScreen() {
               />
 
               <InputField
-                label="Username"
+                label={t("username")}
                 value={username}
                 onChangeText={setUsername}
                 error={errors.username}
@@ -145,7 +147,7 @@ export function SignupScreen() {
               />
 
               <InputField
-                label="Password"
+                label={t("password")}
                 value={password}
                 onChangeText={setPassword}
                 error={errors.password}
@@ -158,7 +160,7 @@ export function SignupScreen() {
 
               <View style={styles.buttonContainer}>
                 <GradientButton
-                  title="Create Account"
+                  title={t("createAccount")}
                   onPress={handleSignup}
                   loading={isLoading}
                   disabled={isLoading}
@@ -169,9 +171,9 @@ export function SignupScreen() {
 
             {/* Bottom Link */}
             <View style={styles.bottomLink}>
-              <Text style={styles.bottomText}>Already have an account? </Text>
+              <Text style={styles.bottomText}>{t("haveAccountPrompt")} </Text>
               <Pressable onPress={() => navigation.navigate(ScreenName.Login)}>
-                <Text style={styles.linkText}>Login</Text>
+                <Text style={styles.linkText}>{t("login")}</Text>
               </Pressable>
             </View>
           </ScrollView>
