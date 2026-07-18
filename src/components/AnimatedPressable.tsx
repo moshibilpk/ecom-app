@@ -53,7 +53,7 @@ const defaultTimingConfig: WithTimingConfig = {
 
 export const AnimatedPressable = ({
   children,
-  scaleValue = 0.97,
+  scaleValue = 0.95,
   opacityValue = 0.8,
   enableScale = true,
   enableOpacity = false,

@@ -12,6 +12,7 @@ import { ScreenName } from "@constants/ScreenNames";
 import bell from "@assets/bell.png";
 import newspaper from "@assets/newspaper.png";
 import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } from "./screens";
+import { selectCartItemCount } from "@store/slices/cartSlice";
 
 // ──────────────────────────────────────────────
 // Navigators
@@ -57,10 +58,11 @@ const badgeStyles = StyleSheet.create({
 });
 
 function CartTabIcon({ color, size }: { color: string; size: number }) {
+  const count = useAppSelector(selectCartItemCount);
   return (
     <View>
       <Text style={{ fontSize: size - 4, color }}>🛒</Text>
-      <TabBadge count={10} />
+      <TabBadge count={count} />
     </View>
   );
 }

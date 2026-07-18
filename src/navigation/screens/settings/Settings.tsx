@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { Alert, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { GradientButton } from "@components/GradientButton";
+import { GradientButton } from "@components";
 import { auth } from "@config/firebase";
 import {
   BorderRadius,
@@ -15,6 +15,7 @@ import {
 } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";
 import { clearUser } from "@store/slices/authSlice";
+import { emptyCart } from "@store/slices/cartSlice";
 
 export function Settings() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ export function Settings() {
             // sign out locally even if Firebase fails
           }
           dispatch(clearUser());
+          dispatch(emptyCart());
         },
       },
     ]);
@@ -51,27 +53,20 @@ export function Settings() {
     <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <StatusBar barStyle="light-content" />
-        {/* User Card */}
         <View style={styles.userCard}>
           <LinearGradient colors={Gradients.card} style={styles.userCardGradient}>
-            {/* Avatar */}
             <LinearGradient colors={Gradients.primary} style={styles.avatar}>
               <Text style={styles.avatarText}>
                 {user?.username ? getInitials(user.username) : "?"}
               </Text>
             </LinearGradient>
-
             <Text style={styles.userName}>{user?.username || "User"}</Text>
             <Text style={styles.userEmail}>{user?.email || "Not signed in"}</Text>
           </LinearGradient>
         </View>
-
-        {/* Logout Button */}
         <View style={styles.logoutContainer}>
-          <GradientButton title="Logout" onPress={handleLogout} variant="danger" size="lg" />
+          <GradientButton title="Logout" onPress={handleLogout} variant="danger" size="md" />
         </View>
-
-        {/* App Version */}
         <Text style={styles.version}>ShopLux v1.0.0</Text>
       </ScrollView>
     </SafeAreaView>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
-import { CategoryList, ProductCard } from "@components";
+import { AnimatedPressable, CategoryList, ProductCard } from "@components";
 import {
   PRODUCTS,
   BorderRadius,
@@ -29,14 +29,14 @@ export function Home({ navigation }: any) {
           <Text style={styles.greeting}>Hey, {user?.username || "there"} 👋</Text>
           <Text style={styles.subGreeting}>{user?.email || "Welcome to ShopLux"}</Text>
         </View>
-        <Pressable style={styles.cartButton} onPress={() => navigation.navigate("Cart")}>
+        <AnimatedPressable style={styles.cartButton} onPress={() => navigation.navigate("Cart")}>
           <Text style={styles.cartIcon}>🛒</Text>
           {cartCount > 0 && (
             <View style={styles.cartBadge}>
               <Text style={styles.cartBadgeText}>{cartCount > 99 ? "99+" : cartCount}</Text>
             </View>
           )}
-        </Pressable>
+        </AnimatedPressable>
       </View>
       <CategoryList selectedCategory={selectedCategory} onSelect={setSelectedCategory} />
       <Text style={styles.sectionTitle}>

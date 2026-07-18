@@ -161,11 +161,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.borderStrong,
     borderRadius: BorderRadius.sm,
     height: 40,
+    paddingHorizontal: Spacing.xs,
   },
   quantityButton: {
     paddingHorizontal: Spacing.base,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 1,
+    borderColor: Colors.border,
+    borderRadius: BorderRadius.sm,
   },
   quantityButtonText: {
     color: Colors.primary,

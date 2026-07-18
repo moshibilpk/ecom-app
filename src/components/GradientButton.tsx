@@ -3,6 +3,7 @@ import React from "react";
 import { ActivityIndicator, Pressable, StyleSheet, Text, View, ViewStyle } from "react-native";
 import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from "@constants/theme";
 import { FontFamily } from "@constants";
+import { AnimatedPressable } from "./AnimatedPressable";
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "outline" | "ghost";
 
@@ -36,9 +37,9 @@ export function GradientButton({
   icon,
 }: GradientButtonProps) {
   const sizeStyle = {
-    sm: { paddingVertical: Spacing.sm, paddingHorizontal: Spacing.md },
-    md: { paddingVertical: Spacing.md, paddingHorizontal: Spacing.xl },
-    lg: { paddingVertical: Spacing.base, paddingHorizontal: Spacing.xxl },
+    sm: { height: 40, paddingHorizontal: Spacing.md },
+    md: { height: 50, paddingHorizontal: Spacing.xl },
+    lg: { height: 60, paddingHorizontal: Spacing.xxl },
   }[size];
 
   const textSize = {
@@ -52,7 +53,7 @@ export function GradientButton({
   if (variant === "outline") {
     return (
       <View style={[fullWidth && styles.fullWidth, style]}>
-        <Pressable
+        <AnimatedPressable
           onPress={onPress}
           disabled={isDisabled}
           style={[styles.outlineButton, sizeStyle, isDisabled && styles.disabled]}>
@@ -62,7 +63,7 @@ export function GradientButton({
           ) : (
             <Text style={[styles.outlineText, { fontSize: textSize }]}>{title}</Text>
           )}
-        </Pressable>
+        </AnimatedPressable>
       </View>
     );
   }
@@ -70,7 +71,7 @@ export function GradientButton({
   if (variant === "ghost") {
     return (
       <View style={[fullWidth && styles.fullWidth, style]}>
-        <Pressable
+        <AnimatedPressable
           onPress={onPress}
           disabled={isDisabled}
           style={[sizeStyle, isDisabled && styles.disabled, styles.ghostButton]}>
@@ -80,19 +81,18 @@ export function GradientButton({
           ) : (
             <Text style={[styles.ghostText, { fontSize: textSize }]}>{title}</Text>
           )}
-        </Pressable>
+        </AnimatedPressable>
       </View>
     );
   }
 
   const gradientColors = GRADIENT_MAP[variant] || GRADIENT_MAP.primary;
-  const shadowStyle = variant === "danger" ? Shadows.danger : Shadows.primary;
 
   return (
-    <View style={[fullWidth && styles.fullWidth, !isDisabled && shadowStyle, style]}>
-      <Pressable onPress={onPress} disabled={isDisabled} style={styles.pressable}>
+    <View style={[fullWidth && styles.fullWidth, style]}>
+      <AnimatedPressable onPress={onPress} disabled={isDisabled} style={styles.pressable}>
         <LinearGradient
-          colors={isDisabled ? ["#3A5070", "#2A4060"] : gradientColors}
+          colors={gradientColors}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={[styles.gradient, sizeStyle, styles.row]}>
@@ -110,7 +110,7 @@ export function GradientButton({
             </Text>
           )}
         </LinearGradient>
-      </Pressable>
+      </AnimatedPressable>
     </View>
   );
 }
