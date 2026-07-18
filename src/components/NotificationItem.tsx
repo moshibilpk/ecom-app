@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { BorderRadius, Colors, Spacing, Typography } from "@constants";
+import { BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constants";
 import { Notification } from "@models";
 import { useAppDispatch } from "@store";
 import { markAsRead } from "@store/slices/notificationSlice";
@@ -112,22 +112,23 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.textSecondary,
     fontSize: Typography.sm,
-    fontWeight: Typography.medium,
+    fontFamily: FontFamily.Medium,
     marginBottom: 2,
   },
   titleUnread: {
     color: Colors.textPrimary,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
   },
   body: {
     color: Colors.textMuted,
     fontSize: Typography.xs,
+    fontFamily: FontFamily.Regular,
     lineHeight: 16,
     marginBottom: Spacing.xs,
   },
   timestamp: {
     color: Colors.textMuted,
     fontSize: 10,
-    fontWeight: Typography.medium,
+    fontFamily: FontFamily.Medium,
   },
 });

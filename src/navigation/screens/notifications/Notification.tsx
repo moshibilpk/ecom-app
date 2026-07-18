@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { NotificationItem } from "@components";
-import { Colors, Spacing, Typography } from "@constants";
+import { Colors, FontFamily, Spacing, Typography } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";
 import {
   markAllAsRead,
@@ -71,12 +71,13 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: Typography.xl,
-    fontWeight: Typography.bold,
+    fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
     marginBottom: Spacing.sm,
   },
   emptySubtitle: {
     fontSize: Typography.base,
+    fontFamily: FontFamily.Regular,
     color: Colors.textSecondary,
     textAlign: "center",
   },
@@ -91,12 +92,12 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: Typography.md,
-    fontWeight: Typography.semiBold,
+    fontFamily: FontFamily.SemiBold,
     color: Colors.textSecondary,
   },
   markAllText: {
     color: Colors.primary,
     fontSize: Typography.sm,
-    fontWeight: Typography.semiBold,
+    fontFamily: FontFamily.SemiBold,
   },
 });
