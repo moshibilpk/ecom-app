@@ -26,7 +26,9 @@ const TYPE_ICONS: Record<string, string> = {
   system: "🔔",
 };
 
-export function NotificationItem({ notification }: NotificationItemProps) {
+export const NotificationItem = React.memo(function NotificationItem({
+  notification,
+}: NotificationItemProps) {
   const dispatch = useAppDispatch();
 
   const handlePress = () => {
@@ -59,7 +61,7 @@ export function NotificationItem({ notification }: NotificationItemProps) {
       </View>
     </Pressable>
   );
-}
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -72,6 +74,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.border,
     position: "relative",
+    height: 94,
   },
   unreadContainer: {
     borderStartWidth: 3,

@@ -1,5 +1,5 @@
-import React from "react";
-import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import React, { useCallback } from "react";
+import { FlatList, Platform, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { NotificationItem } from "@components";
 import { Colors, FontFamily, Spacing, Typography } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";
@@ -14,6 +14,20 @@ export function Notification() {
   const dispatch = useAppDispatch();
   const notifications = useAppSelector(selectNotifications);
   const unreadCount = useAppSelector(selectUnreadCount);
+
+  const renderItem = useCallback(({ item }: { item: (typeof notifications)[number] }) => {
+    return <NotificationItem notification={item} />;
+  }, []);
+
+  const getItemLayout = useCallback((_: unknown, index: number) => {
+    const itemHeight = 94;
+    const itemMargin = 8;
+    return {
+      length: itemHeight + itemMargin,
+      offset: (itemHeight + itemMargin) * index,
+      index,
+    };
+  }, []);
 
   if (notifications.length === 0) {
     return (
@@ -31,13 +45,17 @@ export function Notification() {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <StatusBar barStyle="light-content" />
-
       <FlatList
         data={notifications}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <NotificationItem notification={item} />}
+        renderItem={renderItem}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        initialNumToRender={12}
+        maxToRenderPerBatch={12}
+        windowSize={5}
+        removeClippedSubviews={Platform.OS === "android"}
+        getItemLayout={getItemLayout}
         ListHeaderComponent={
           <View style={styles.headerRow}>
             <Text style={styles.headerTitle}>
