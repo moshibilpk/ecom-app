@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     color: Colors.textMuted,
     fontSize: Typography.xs,
     fontFamily: FontFamily.Regular,
-    lineHeight: 16,
+    lineHeight: Typography.lineHeightXs,
     marginBottom: Spacing.xs,
   },
   timestamp: {

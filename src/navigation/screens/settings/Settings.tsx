@@ -1,9 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Alert, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { GradientButton } from "@components";
-import { auth } from "@config/firebase";
 import {
   BorderRadius,
   Colors,
@@ -13,43 +12,10 @@ import {
   Spacing,
   Typography,
 } from "@constants";
-import { useAppDispatch, useAppSelector } from "@store";
-import { clearUser } from "@store/slices/authSlice";
-import { emptyCart } from "@store/slices/cartSlice";
-import { resetNotifications } from "@store/slices/notificationSlice";
+import { useSettings } from "./useSettings";
 
 export function Settings() {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.auth.user);
-
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
-  };
-
-  const handleLogout = () => {
-    Alert.alert("Logout", "Are you sure you want to sign out?", [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Logout",
-        style: "destructive",
-        onPress: async () => {
-          try {
-            await auth().signOut();
-          } catch {
-            // sign out locally even if Firebase fails
-          }
-          dispatch(clearUser());
-          dispatch(emptyCart());
-          dispatch(resetNotifications());
-        },
-      },
-    ]);
-  };
+  const { user, userInitials, onLogout, handleSendTestNotification } = useSettings();
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -58,16 +24,23 @@ export function Settings() {
         <View style={styles.userCard}>
           <LinearGradient colors={Gradients.card} style={styles.userCardGradient}>
             <LinearGradient colors={Gradients.primary} style={styles.avatar}>
-              <Text style={styles.avatarText}>
-                {user?.username ? getInitials(user.username) : "?"}
-              </Text>
+              <Text style={styles.avatarText}>{userInitials}</Text>
             </LinearGradient>
             <Text style={styles.userName}>{user?.username || "User"}</Text>
             <Text style={styles.userEmail}>{user?.email || "Not signed in"}</Text>
           </LinearGradient>
         </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Developer Tools</Text>
+          <GradientButton
+            title="🔔 Send Test Notification"
+            onPress={handleSendTestNotification}
+            variant="secondary"
+            size="md"
+          />
+        </View>
         <View style={styles.logoutContainer}>
-          <GradientButton title="Logout" onPress={handleLogout} variant="danger" size="md" />
+          <GradientButton title="Logout" onPress={onLogout} variant="danger" size="md" />
         </View>
         <Text style={styles.version}>ShopLux v1.0.0</Text>
       </ScrollView>

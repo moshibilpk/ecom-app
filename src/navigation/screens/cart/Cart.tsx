@@ -1,40 +1,12 @@
 import React from "react";
-import { Alert, FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
+import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
 import { CartItemRow, GradientButton } from "@components";
 import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "@constants";
-import { useAppDispatch, useAppSelector } from "@store";
-import {
-  emptyCart,
-  selectCartItems,
-  selectCartItemCount,
-  selectCartTotal,
-} from "@store/slices/cartSlice";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useCart } from "./useCart";
 
 export function CartScreen() {
-  const dispatch = useAppDispatch();
-  const items = useAppSelector(selectCartItems);
-  const itemCount = useAppSelector(selectCartItemCount);
-  const total = useAppSelector(selectCartTotal);
-
-  const handleEmptyCart = () => {
-    Alert.alert("Empty Cart", "Are you sure you want to remove all items from your cart?", [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Empty Cart",
-        style: "destructive",
-        onPress: () => dispatch(emptyCart()),
-      },
-    ]);
-  };
-
-  const handleCheckout = () => {
-    Alert.alert(
-      "🎉 Order Placed!",
-      `Your order of ${itemCount} item(s) worth $${total.toFixed(2)} has been placed successfully!`,
-      [{ text: "Great!", onPress: () => dispatch(emptyCart()) }],
-    );
-  };
+  const { items, itemCount, total, handleEmptyCart, handleCheckout } = useCart();
 
   if (items.length === 0) {
     return (

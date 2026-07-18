@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { ActivityIndicator, Pressable, StyleSheet, Text, View, ViewStyle } from "react-native";
-import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from "@constants/theme";
+import { ActivityIndicator, StyleSheet, Text, View, ViewStyle } from "react-native";
+import { BorderRadius, Colors, Gradients, Spacing, Typography } from "@constants/theme";
 import { FontFamily } from "@constants";
 import { AnimatedPressable } from "./AnimatedPressable";
 
@@ -48,6 +48,12 @@ export function GradientButton({
     lg: Typography.md,
   }[size];
 
+  const textLineHeight = {
+    sm: Typography.lineHeightSm,
+    md: Typography.lineHeightBase,
+    lg: Typography.lineHeightMd,
+  }[size];
+
   const isDisabled = disabled || loading;
 
   if (variant === "outline") {
@@ -61,7 +67,9 @@ export function GradientButton({
           {loading ? (
             <ActivityIndicator size="small" color={Colors.primary} />
           ) : (
-            <Text style={[styles.outlineText, { fontSize: textSize }]}>{title}</Text>
+            <Text style={[styles.outlineText, { fontSize: textSize, lineHeight: textLineHeight }]}>
+              {title}
+            </Text>
           )}
         </AnimatedPressable>
       </View>
@@ -79,7 +87,9 @@ export function GradientButton({
           {loading ? (
             <ActivityIndicator size="small" color={Colors.textSecondary} />
           ) : (
-            <Text style={[styles.ghostText, { fontSize: textSize }]}>{title}</Text>
+            <Text style={[styles.ghostText, { fontSize: textSize, lineHeight: textLineHeight }]}>
+              {title}
+            </Text>
           )}
         </AnimatedPressable>
       </View>
@@ -103,7 +113,7 @@ export function GradientButton({
             <Text
               style={[
                 styles.gradientText,
-                { fontSize: textSize },
+                { fontSize: textSize, lineHeight: textLineHeight },
                 isDisabled && styles.disabledText,
               ]}>
               {title}

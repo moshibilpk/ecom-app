@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     color: Colors.textInverse,
     fontSize: Typography.sm,
     fontFamily: FontFamily.Bold,
+    lineHeight: Typography.lineHeightSm,
   },
   chipInactive: {
     paddingHorizontal: Spacing.base,
@@ -86,5 +87,6 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     fontSize: Typography.sm,
     fontFamily: FontFamily.Medium,
+    lineHeight: Typography.lineHeightSm,
   },
 });

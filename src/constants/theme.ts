@@ -107,10 +107,16 @@ export const Typography = {
   bold: "700" as const,
   extraBold: "800" as const,
 
-  // Line heights
-  tight: 1.2,
-  normal: 1.4,
-  relaxed: 1.6,
+  // Line heights (absolute pixel values for React Native)
+  lineHeightXs: 16,
+  lineHeightSm: 18,
+  lineHeightBase: 22,
+  lineHeightMd: 24,
+  lineHeightLg: 28,
+  lineHeightXl: 32,
+  lineHeightXxl: 38,
+  lineHeightXxxl: 48,
+  lineHeightDisplay: 56,
 } as const;
 
 export const Shadows = {

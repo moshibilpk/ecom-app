@@ -1,7 +1,10 @@
 import React, { Fragment } from "react";
 import { createNavigationContainerRef, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import { Image, StyleSheet, View } from "react-native";
 import { Text } from "@react-navigation/elements";
 import { Provider } from "react-redux";
@@ -14,6 +17,8 @@ import newspaper from "@assets/newspaper.png";
 import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } from "./screens";
 import { selectCartItemCount } from "@store/slices/cartSlice";
 import { selectUnreadCount } from "@store/slices/notificationSlice";
+import { useNotificationService } from "@hooks/useNotificationService";
+import { FontFamily } from "@constants";
 
 // ──────────────────────────────────────────────
 // Navigators
@@ -78,7 +83,7 @@ function NotificationTabIcon({ color, size }: { color: string; size: number }) {
   );
 }
 
-const tabScreenOptions = {
+const tabScreenOptions: BottomTabNavigationOptions = {
   headerShown: false,
   tabBarActiveTintColor: Colors.tabActive,
   tabBarInactiveTintColor: Colors.tabInactive,
@@ -86,15 +91,10 @@ const tabScreenOptions = {
     backgroundColor: Colors.tabBackground,
     borderTopColor: Colors.border,
     borderTopWidth: 1,
-    paddingBottom: 4,
-    height: 60,
+    height: 80,
   },
-  headerStyle: {
-    backgroundColor: Colors.background,
-  },
-  headerTintColor: Colors.textPrimary,
-  headerTitleStyle: {
-    fontWeight: Typography.semiBold,
+  tabBarLabelStyle: {
+    fontFamily: FontFamily.SemiBold,
   },
 };
 
@@ -141,6 +141,9 @@ function BottomTabs() {
 
 function RootNavigator() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
+  // Bootstrap FCM: permissions, token, foreground listener
+  useNotificationService();
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>

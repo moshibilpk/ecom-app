@@ -1,0 +1,89 @@
+{
+  "info": {
+    "_postman_id": "f8d8b139-4d6d-4952-b8e7-ff4e5672abf3",
+    "name": "Ecom App Push Notifications API",
+    "description": "Endpoints to register device tokens and trigger push notifications using Firebase Cloud Messaging.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "System Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register FCM Device Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"user_12345\",\n  \"token\": \"PUT_YOUR_DEVICE_FCM_TOKEN_HERE\",\n  \"platform\": \"android\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/notifications/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notifications",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Send Push Notification",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"PUT_YOUR_DEVICE_FCM_TOKEN_HERE\",\n  \"title\": \"🎁 Discount Just For You!\",\n  \"body\": \"Use code SHOP20 to get 20% off your next purchase.\",\n  \"data\": {\n    \"type\": \"promo\",\n    \"productId\": \"prod_abc123\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/notifications/send",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "notifications",
+            "send"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 import "@expo/metro-runtime"; // Necessary for Fast Refresh on Web
 import { registerRootComponent } from "expo";
-
+import { getMessaging, setBackgroundMessageHandler } from "@react-native-firebase/messaging";
 import { App } from "./src/App";
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
+const messaging = getMessaging();
+setBackgroundMessageHandler(messaging, async (remoteMessage) => {
+  console.log("[FCM] Background message:", remoteMessage);
+});
+
 registerRootComponent(App);
