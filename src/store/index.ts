@@ -1,17 +1,19 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { persistReducer, persistStore } from 'redux-persist';
-import authReducer from './slices/authSlice';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { persistReducer, persistStore } from "redux-persist";
+import authReducer from "./slices/authSlice";
+import cartReducer from "./slices/cartSlice";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: AsyncStorage,
-  whitelist: ['auth'],
+  whitelist: ["auth", "cart"],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  cart: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -22,12 +24,12 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [
-          'persist/PERSIST',
-          'persist/REHYDRATE',
-          'persist/FLUSH',
-          'persist/PURGE',
-          'persist/PAUSE',
-          'persist/REGISTER',
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/FLUSH",
+          "persist/PURGE",
+          "persist/PAUSE",
+          "persist/REGISTER",
         ],
       },
     }),

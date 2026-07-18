@@ -1,17 +1,17 @@
-import React, { Fragment } from 'react';
-import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, StyleSheet, View } from 'react-native';
-import { Text } from '@react-navigation/elements';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, store, useAppSelector } from '@store';
-import { Colors, Typography } from '@constants/theme';
-import { ScreenName } from '@constants/ScreenNames';
-import bell from '@assets/bell.png';
-import newspaper from '@assets/newspaper.png';
-import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } from './screens';
+import React, { Fragment } from "react";
+import { createNavigationContainerRef, NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Image, StyleSheet, View } from "react-native";
+import { Text } from "@react-navigation/elements";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store, useAppSelector } from "@store";
+import { Colors, Typography } from "@constants/theme";
+import { ScreenName } from "@constants/ScreenNames";
+import bell from "@assets/bell.png";
+import newspaper from "@assets/newspaper.png";
+import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } from "./screens";
 
 // ──────────────────────────────────────────────
 // Navigators
@@ -31,28 +31,28 @@ function TabBadge({ count }: { count: number }) {
   if (count <= 0) return null;
   return (
     <View style={badgeStyles.badge}>
-      <Text style={badgeStyles.badgeText}>{count > 99 ? '99+' : count}</Text>
+      <Text style={badgeStyles.badgeText}>{count > 99 ? "99+" : count}</Text>
     </View>
   );
 }
 
 const badgeStyles = StyleSheet.create({
   badge: {
-    position: 'absolute',
+    position: "absolute",
     top: -4,
     right: -10,
-    backgroundColor: '#FF5252',
+    backgroundColor: "#FF5252",
     borderRadius: 999,
     minWidth: 18,
     height: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: 3,
   },
   badgeText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 10,
-    fontWeight: '700',
+    fontWeight: "700",
   },
 });
 
@@ -101,7 +101,7 @@ function BottomTabs() {
         name={ScreenName.Home}
         component={Home}
         options={{
-          title: 'Shop',
+          title: "Shop",
           tabBarIcon: ({ color, size }) => (
             <Image source={newspaper} tintColor={color} style={{ width: size, height: size }} />
           ),
@@ -111,7 +111,7 @@ function BottomTabs() {
         name={ScreenName.Cart}
         component={CartScreen}
         options={{
-          title: 'Cart',
+          title: "Cart",
           tabBarIcon: CartTabIcon,
         }}
       />
@@ -119,7 +119,7 @@ function BottomTabs() {
         name={ScreenName.Notification}
         component={Notification}
         options={{
-          title: 'Notifications',
+          title: "Notifications",
           tabBarIcon: NotificationTabIcon,
         }}
       />
@@ -127,7 +127,7 @@ function BottomTabs() {
         name={ScreenName.Settings}
         component={Settings}
         options={{
-          title: 'Settings',
+          title: "Settings",
           tabBarIcon: ({ color, size }) => <Text style={{ fontSize: size - 4, color }}>⚙️</Text>,
         }}
       />
@@ -162,8 +162,7 @@ export function Navigation(props: { linking: any; onReady: () => void; theme?: a
           ref={navigationRef}
           linking={props.linking}
           onReady={props.onReady}
-          theme={props.theme}
-        >
+          theme={props.theme}>
           <RootNavigator />
         </NavigationContainer>
       </PersistGate>

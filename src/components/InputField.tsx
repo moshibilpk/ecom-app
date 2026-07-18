@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from 'react-native';
-import { BorderRadius, Colors, Spacing, Typography } from '@constants/theme';
-import { FontFamily } from '@constants';
+} from "react-native";
+import { BorderRadius, Colors, Spacing, Typography } from "@constants/theme";
+import { FontFamily } from "@constants";
 
 interface InputFieldProps extends TextInputProps {
   label: string;
@@ -65,8 +65,7 @@ export function InputField({
           <TouchableOpacity
             onPress={onRightIconPress}
             style={styles.rightIcon}
-            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-          >
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
             {rightIcon}
           </TouchableOpacity>
         )}
@@ -79,7 +78,7 @@ export function InputField({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
     marginBottom: Spacing.base,
   },
   inputWrapper: {
@@ -87,8 +86,8 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: BorderRadius.md,
     paddingHorizontal: Spacing.base,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     height: 50,
   },
   label: {
@@ -104,12 +103,12 @@ const styles = StyleSheet.create({
     fontSize: Typography.base,
     fontFamily: FontFamily.Regular,
     paddingVertical: 0,
-    height: '100%',
+    height: "100%",
   },
   rightIcon: {
     marginStart: Spacing.sm,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   errorText: {
     color: Colors.error,

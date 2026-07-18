@@ -1,5 +1,5 @@
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
 
 export { auth, firestore };
 
@@ -11,7 +11,7 @@ export async function saveUserToFirestore(
   email: string,
   username: string,
 ): Promise<void> {
-  await firestore().collection('users').doc(uid).set(
+  await firestore().collection("users").doc(uid).set(
     {
       uid,
       email,
@@ -26,7 +26,7 @@ export async function saveUserToFirestore(
  * Fetch username from Firestore on login
  */
 export async function getUserFromFirestore(uid: string): Promise<{ username: string } | null> {
-  const doc = await firestore().collection('users').doc(uid).get();
+  const doc = await firestore().collection("users").doc(uid).get();
   const data = doc.data();
   if (data) {
     return data as { username: string };

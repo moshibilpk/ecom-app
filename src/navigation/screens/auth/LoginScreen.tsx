@@ -1,5 +1,5 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
+import { LinearGradient } from "expo-linear-gradient";
+import React, { useState } from "react";
 import {
   Animated,
   Keyboard,
@@ -12,8 +12,8 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-} from 'react-native';
-import { GradientButton, InputField } from '@components';
+} from "react-native";
+import { GradientButton, InputField } from "@components";
 import {
   BorderRadius,
   Colors,
@@ -23,15 +23,15 @@ import {
   Typography,
   ScreenName,
   FontFamily,
-} from '@constants';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { useAuth } from '@hooks';
+} from "@constants";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useAuth } from "@hooks";
 
 export function LoginScreen() {
   const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
   const { login, isLoading } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
@@ -57,15 +57,15 @@ export function LoginScreen() {
     const newErrors: { email?: string; password?: string } = {};
 
     if (!email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      newErrors.email = 'Enter a valid email address';
+      newErrors.email = "Enter a valid email address";
     }
 
     if (!password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = "Password must be at least 6 characters";
     }
 
     setErrors(newErrors);
@@ -84,21 +84,17 @@ export function LoginScreen() {
       <LinearGradient colors={Gradients.background} style={StyleSheet.absoluteFill} />
       <KeyboardAvoidingView
         style={styles.flex}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      >
+        behavior={Platform.OS === "ios" ? "padding" : undefined}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-          >
+            keyboardShouldPersistTaps="handled">
             <Animated.View
-              style={[styles.iconContainer, { transform: [{ translateY: floatAnim }] }]}
-            >
+              style={[styles.iconContainer, { transform: [{ translateY: floatAnim }] }]}>
               <LinearGradient
-                colors={['rgba(0, 212, 170, 0.15)', 'rgba(0, 153, 204, 0.08)']}
-                style={styles.iconGradient}
-              >
+                colors={["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"]}
+                style={styles.iconGradient}>
                 <Text style={styles.iconText}>🛍️</Text>
               </LinearGradient>
               <View style={styles.glowRing} />
@@ -127,7 +123,7 @@ export function LoginScreen() {
                 secureTextEntry={!showPassword}
                 autoCapitalize="none"
                 textContentType="password"
-                rightIcon={<Text style={styles.eyeIcon}>{showPassword ? '👁️' : '🔒'}</Text>}
+                rightIcon={<Text style={styles.eyeIcon}>{showPassword ? "👁️" : "🔒"}</Text>}
                 onRightIconPress={() => setShowPassword(!showPassword)}
               />
 
@@ -166,54 +162,54 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingHorizontal: Spacing.xl,
     paddingTop: Spacing.giant,
     paddingBottom: Spacing.xxl,
   },
   iconContainer: {
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: Spacing.xxl,
-    position: 'relative',
+    position: "relative",
   },
   iconGradient: {
     width: 100,
     height: 100,
     borderRadius: BorderRadius.full,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1.5,
-    borderColor: 'rgba(0, 212, 170, 0.3)',
+    borderColor: "rgba(0, 212, 170, 0.3)",
   },
   iconText: {
     fontSize: 44,
   },
   glowRing: {
-    position: 'absolute',
+    position: "absolute",
     top: -6,
     left: -6,
     right: -6,
     bottom: -6,
     borderRadius: BorderRadius.full,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.12)',
+    borderColor: "rgba(0, 212, 170, 0.12)",
   },
   title: {
     fontSize: Typography.xxxl,
     fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: Spacing.sm,
   },
   subtitle: {
     fontSize: Typography.base,
     color: Colors.textSecondary,
     fontFamily: FontFamily.Regular,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: Spacing.xxxl,
   },
   form: {
-    width: '100%',
+    width: "100%",
   },
   eyeIcon: {
     fontSize: 20,
@@ -223,9 +219,9 @@ const styles = StyleSheet.create({
     ...Shadows.primary,
   },
   bottomLink: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: Spacing.xxxl,
   },
   bottomText: {

@@ -5,67 +5,67 @@
 
 export const Colors = {
   // Backgrounds
-  background: '#0A1628',
-  surface: '#0F2040',
-  surfaceElevated: '#162B52',
-  surfaceCard: '#1A3360',
+  background: "#0A1628",
+  surface: "#0F2040",
+  surfaceElevated: "#162B52",
+  surfaceCard: "#1A3360",
 
   // Accents
-  primary: '#00D4AA',
-  primaryDark: '#00A885',
-  primaryLight: '#33DDBB',
+  primary: "#00D4AA",
+  primaryDark: "#00A885",
+  primaryLight: "#33DDBB",
 
   // Secondary
-  secondary: '#FFB020',
-  secondaryDark: '#E09010',
-  secondaryLight: '#FFC84D',
+  secondary: "#FFB020",
+  secondaryDark: "#E09010",
+  secondaryLight: "#FFC84D",
 
   // Text
-  textPrimary: '#FFFFFF',
-  textSecondary: '#A8C0D6',
-  textMuted: '#5A7A9A',
-  textInverse: '#0A1628',
+  textPrimary: "#FFFFFF",
+  textSecondary: "#A8C0D6",
+  textMuted: "#5A7A9A",
+  textInverse: "#0A1628",
 
   // Status
-  success: '#00D4AA',
-  error: '#FF5252',
-  warning: '#FFB020',
-  info: '#4DAAFF',
+  success: "#00D4AA",
+  error: "#FF5252",
+  warning: "#FFB020",
+  info: "#4DAAFF",
 
   // Borders
-  border: 'rgba(0, 212, 170, 0.15)',
-  borderFocus: 'rgba(0, 212, 170, 0.6)',
-  borderStrong: 'rgba(0, 212, 170, 0.3)',
+  border: "rgba(0, 212, 170, 0.15)",
+  borderFocus: "rgba(0, 212, 170, 0.6)",
+  borderStrong: "rgba(0, 212, 170, 0.3)",
 
   // Overlays / Glassmorphism
-  glass: 'rgba(15, 32, 64, 0.85)',
-  glassLight: 'rgba(26, 51, 96, 0.6)',
-  overlay: 'rgba(10, 22, 40, 0.7)',
+  glass: "rgba(15, 32, 64, 0.85)",
+  glassLight: "rgba(26, 51, 96, 0.6)",
+  overlay: "rgba(10, 22, 40, 0.7)",
 
   // Shadows
-  shadowDark: 'rgba(0, 0, 0, 0.5)',
-  shadowPrimary: 'rgba(0, 212, 170, 0.3)',
+  shadowDark: "rgba(0, 0, 0, 0.5)",
+  shadowPrimary: "rgba(0, 212, 170, 0.3)",
 
   // Tab bar
-  tabActive: '#00D4AA',
-  tabInactive: '#5A7A9A',
-  tabBackground: '#0A1628',
+  tabActive: "#00D4AA",
+  tabInactive: "#5A7A9A",
+  tabBackground: "#0A1628",
 
   // Cart badge
-  badge: '#FF5252',
+  badge: "#FF5252",
 
   // Transparent
-  transparent: 'transparent',
+  transparent: "transparent",
 } as const;
 
 export const Gradients = {
-  primary: ['#00D4AA', '#0099CC'] as const,
-  primaryReverse: ['#0099CC', '#00D4AA'] as const,
-  secondary: ['#FFB020', '#FF7820'] as const,
-  background: ['#0A1628', '#0F2040'] as const,
-  card: ['#1A3360', '#0F2040'] as const,
-  danger: ['#FF5252', '#CC0000'] as const,
-  dark: ['#162B52', '#0A1628'] as const,
+  primary: ["#00D4AA", "#0099CC"] as const,
+  primaryReverse: ["#0099CC", "#00D4AA"] as const,
+  secondary: ["#FFB020", "#FF7820"] as const,
+  background: ["#0A1628", "#0F2040"] as const,
+  card: ["#1A3360", "#0F2040"] as const,
+  danger: ["#FF5252", "#CC0000"] as const,
+  dark: ["#162B52", "#0A1628"] as const,
 } as const;
 
 export const Spacing = {
@@ -101,11 +101,11 @@ export const Typography = {
   display: 44,
 
   // Font weights
-  regular: '400' as const,
-  medium: '500' as const,
-  semiBold: '600' as const,
-  bold: '700' as const,
-  extraBold: '800' as const,
+  regular: "400" as const,
+  medium: "500" as const,
+  semiBold: "600" as const,
+  bold: "700" as const,
+  extraBold: "800" as const,
 
   // Line heights
   tight: 1.2,

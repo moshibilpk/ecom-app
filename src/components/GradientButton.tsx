@@ -1,10 +1,10 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from '@constants/theme';
-import { FontFamily } from '@constants';
+import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import { ActivityIndicator, Pressable, StyleSheet, Text, View, ViewStyle } from "react-native";
+import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from "@constants/theme";
+import { FontFamily } from "@constants";
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost';
+type ButtonVariant = "primary" | "secondary" | "danger" | "outline" | "ghost";
 
 interface GradientButtonProps {
   title: string;
@@ -14,7 +14,7 @@ interface GradientButtonProps {
   disabled?: boolean;
   style?: ViewStyle;
   fullWidth?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   icon?: React.ReactNode;
 }
 
@@ -27,12 +27,12 @@ const GRADIENT_MAP: Record<string, readonly [string, string, ...string[]]> = {
 export function GradientButton({
   title,
   onPress,
-  variant = 'primary',
+  variant = "primary",
   loading = false,
   disabled = false,
   style,
   fullWidth = true,
-  size = 'md',
+  size = "md",
   icon,
 }: GradientButtonProps) {
   const sizeStyle = {
@@ -49,14 +49,13 @@ export function GradientButton({
 
   const isDisabled = disabled || loading;
 
-  if (variant === 'outline') {
+  if (variant === "outline") {
     return (
       <View style={[fullWidth && styles.fullWidth, style]}>
         <Pressable
           onPress={onPress}
           disabled={isDisabled}
-          style={[styles.outlineButton, sizeStyle, isDisabled && styles.disabled]}
-        >
+          style={[styles.outlineButton, sizeStyle, isDisabled && styles.disabled]}>
           {icon}
           {loading ? (
             <ActivityIndicator size="small" color={Colors.primary} />
@@ -68,14 +67,13 @@ export function GradientButton({
     );
   }
 
-  if (variant === 'ghost') {
+  if (variant === "ghost") {
     return (
       <View style={[fullWidth && styles.fullWidth, style]}>
         <Pressable
           onPress={onPress}
           disabled={isDisabled}
-          style={[sizeStyle, isDisabled && styles.disabled, styles.ghostButton]}
-        >
+          style={[sizeStyle, isDisabled && styles.disabled, styles.ghostButton]}>
           {icon}
           {loading ? (
             <ActivityIndicator size="small" color={Colors.textSecondary} />
@@ -88,17 +86,16 @@ export function GradientButton({
   }
 
   const gradientColors = GRADIENT_MAP[variant] || GRADIENT_MAP.primary;
-  const shadowStyle = variant === 'danger' ? Shadows.danger : Shadows.primary;
+  const shadowStyle = variant === "danger" ? Shadows.danger : Shadows.primary;
 
   return (
     <View style={[fullWidth && styles.fullWidth, !isDisabled && shadowStyle, style]}>
       <Pressable onPress={onPress} disabled={isDisabled} style={styles.pressable}>
         <LinearGradient
-          colors={isDisabled ? ['#3A5070', '#2A4060'] : gradientColors}
+          colors={isDisabled ? ["#3A5070", "#2A4060"] : gradientColors}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={[styles.gradient, sizeStyle, styles.row]}
-        >
+          style={[styles.gradient, sizeStyle, styles.row]}>
           {icon}
           {loading ? (
             <ActivityIndicator size="small" color={Colors.textInverse} />
@@ -108,8 +105,7 @@ export function GradientButton({
                 styles.gradientText,
                 { fontSize: textSize },
                 isDisabled && styles.disabledText,
-              ]}
-            >
+              ]}>
               {title}
             </Text>
           )}
@@ -121,19 +117,19 @@ export function GradientButton({
 
 const styles = StyleSheet.create({
   fullWidth: {
-    width: '100%',
+    width: "100%",
   },
   pressable: {
     borderRadius: BorderRadius.lg,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   gradient: {
     borderRadius: BorderRadius.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Spacing.sm,
   },
   gradientText: {
@@ -145,9 +141,9 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: Colors.primary,
     borderRadius: BorderRadius.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
     gap: Spacing.sm,
   },
   outlineText: {
@@ -156,9 +152,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   ghostButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
     gap: Spacing.sm,
   },
   ghostText: {
