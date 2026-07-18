@@ -19,3 +19,12 @@ export interface CartItem {
   product: Product;
   quantity: number;
 }
+
+export interface Notification {
+  id: string;
+  title: string;
+  body: string;
+  timestamp: number;
+  read: boolean;
+  type?: "order" | "promo" | "system";
+}

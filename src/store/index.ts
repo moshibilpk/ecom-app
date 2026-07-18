@@ -4,16 +4,18 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { persistReducer, persistStore } from "redux-persist";
 import authReducer from "./slices/authSlice";
 import cartReducer from "./slices/cartSlice";
+import notificationReducer from "./slices/notificationSlice";
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["auth", "cart"],
+  whitelist: ["auth", "cart", "notifications"],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
+  notifications: notificationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

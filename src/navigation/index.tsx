@@ -13,6 +13,7 @@ import bell from "@assets/bell.png";
 import newspaper from "@assets/newspaper.png";
 import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } from "./screens";
 import { selectCartItemCount } from "@store/slices/cartSlice";
+import { selectUnreadCount } from "@store/slices/notificationSlice";
 
 // ──────────────────────────────────────────────
 // Navigators
@@ -68,10 +69,11 @@ function CartTabIcon({ color, size }: { color: string; size: number }) {
 }
 
 function NotificationTabIcon({ color, size }: { color: string; size: number }) {
+  const count = useAppSelector(selectUnreadCount);
   return (
     <View>
       <Image source={bell} tintColor={color} style={{ width: size, height: size }} />
-      <TabBadge count={10} />
+      <TabBadge count={count} />
     </View>
   );
 }

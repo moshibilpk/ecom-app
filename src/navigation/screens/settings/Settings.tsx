@@ -16,6 +16,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@store";
 import { clearUser } from "@store/slices/authSlice";
 import { emptyCart } from "@store/slices/cartSlice";
+import { resetNotifications } from "@store/slices/notificationSlice";
 
 export function Settings() {
   const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ export function Settings() {
           }
           dispatch(clearUser());
           dispatch(emptyCart());
+          dispatch(resetNotifications());
         },
       },
     ]);
