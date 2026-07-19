@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     color: Colors.textSecondary,
     fontFamily: FontFamily.Medium,
     marginBottom: Spacing.xs,
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: Colors.textPrimary,
     fontSize: Typography.base,
+    lineHeight: Typography.lineHeightBase,
     fontFamily: FontFamily.Regular,
     paddingVertical: 0,
     height: "100%",
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: Colors.error,
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.Medium,
     marginTop: Spacing.xs,
     marginStart: Spacing.sm,

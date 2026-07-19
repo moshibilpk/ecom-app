@@ -91,12 +91,14 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: Typography.xl,
+    lineHeight: Typography.lineHeightXl,
     fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
     marginBottom: Spacing.sm,
   },
   emptySubtitle: {
     fontSize: Typography.base,
+    lineHeight: Typography.lineHeightBase,
     fontFamily: FontFamily.Regular,
     color: Colors.textSecondary,
     textAlign: "center",
@@ -112,12 +114,14 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: Typography.md,
+    lineHeight: Typography.lineHeightMd,
     fontFamily: FontFamily.SemiBold,
     color: Colors.textSecondary,
   },
   markAllText: {
     color: Colors.primary,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.SemiBold,
   },
 });

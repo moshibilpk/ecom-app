@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   priceText: {
     color: Colors.textInverse,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Bold,
   },
   info: {
@@ -112,12 +113,14 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.textPrimary,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.SemiBold,
     marginBottom: 2,
   },
   description: {
     color: Colors.textMuted,
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.Regular,
     marginBottom: Spacing.sm,
   },
@@ -130,11 +133,13 @@ const styles = StyleSheet.create({
   rating: {
     color: Colors.secondary,
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.SemiBold,
   },
   reviews: {
     color: Colors.textMuted,
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.Regular,
   },
   addButton: {
@@ -149,7 +154,7 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: Colors.primary,
     fontSize: Typography.xs,
-    lineHeight: Typography.lineHeightSm,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.Bold,
     letterSpacing: 0.3,
   },

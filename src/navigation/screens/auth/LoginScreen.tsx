@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Typography.xxxl,
+    lineHeight: Typography.lineHeightXxxl,
     fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
     textAlign: "center",
@@ -195,6 +196,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: Typography.base,
+    lineHeight: Typography.lineHeightBase,
     color: Colors.textSecondary,
     fontFamily: FontFamily.Regular,
     textAlign: "center",
@@ -216,11 +218,13 @@ const styles = StyleSheet.create({
   bottomText: {
     color: Colors.textSecondary,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Regular,
   },
   linkText: {
     color: Colors.primary,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Bold,
   },
 });

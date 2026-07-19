@@ -80,17 +80,20 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.textPrimary,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.SemiBold,
     marginBottom: 2,
   },
   price: {
     color: Colors.primary,
     fontSize: Typography.base,
+    lineHeight: Typography.lineHeightBase,
     fontFamily: FontFamily.Bold,
   },
   unitPrice: {
     color: Colors.textMuted,
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.Regular,
   },
   quantityContainer: {
@@ -111,11 +114,13 @@ const styles = StyleSheet.create({
   qtyButtonText: {
     color: Colors.primary,
     fontSize: Typography.md,
+    lineHeight: Typography.lineHeightMd,
     fontFamily: FontFamily.Bold,
   },
   quantity: {
     color: Colors.textPrimary,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Bold,
     minWidth: 24,
     textAlign: "center",
@@ -132,6 +137,7 @@ const styles = StyleSheet.create({
   removeText: {
     color: Colors.error,
     fontSize: 12,
+    lineHeight: 16,
     fontFamily: FontFamily.Bold,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Ionicons } from "@expo/vector-icons";
 import { AnimatedPressable, CategoryList, ProductCard } from "@components";
@@ -96,11 +96,13 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: Typography.xl,
+    lineHeight: Typography.lineHeightXl,
     fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
   },
   subGreeting: {
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Regular,
     color: Colors.textSecondary,
     marginTop: 2,
@@ -132,10 +134,12 @@ const styles = StyleSheet.create({
   cartBadgeText: {
     color: Colors.textPrimary,
     fontSize: 10,
+    lineHeight: 12,
     fontFamily: FontFamily.Bold,
   },
   sectionTitle: {
     fontSize: Typography.md,
+    lineHeight: Typography.lineHeightMd,
     fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
     marginBottom: Spacing.sm,

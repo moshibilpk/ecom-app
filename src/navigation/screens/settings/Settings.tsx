@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View, Pressable } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -114,16 +114,19 @@ const styles = StyleSheet.create({
   avatarText: {
     color: Colors.textInverse,
     fontSize: Typography.xl,
+    lineHeight: Typography.lineHeightXl,
     fontFamily: FontFamily.Bold,
   },
   userName: {
     fontSize: Typography.lg,
+    lineHeight: Typography.lineHeightLg,
     fontFamily: FontFamily.Bold,
     color: Colors.textPrimary,
     marginBottom: Spacing.xs,
   },
   userEmail: {
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Regular,
     color: Colors.textSecondary,
   },
@@ -132,6 +135,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.Bold,
     color: Colors.textMuted,
     textTransform: "uppercase",
@@ -159,13 +163,13 @@ const styles = StyleSheet.create({
   chevron: {
     color: Colors.textMuted,
     fontSize: Typography.lg,
+    lineHeight: Typography.lineHeightLg,
     fontFamily: FontFamily.Regular,
-    lineHeight: Typography.lineHeightBase,
   },
   chevronValue: {
     color: Colors.textMuted,
     fontSize: Typography.sm,
-    lineHeight: Typography.lineHeightBase,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Regular,
   },
   logoutContainer: {
@@ -176,6 +180,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: Colors.textMuted,
     fontSize: Typography.xs,
+    lineHeight: Typography.lineHeightXs,
     fontFamily: FontFamily.Regular,
     marginTop: Spacing.xl,
   },

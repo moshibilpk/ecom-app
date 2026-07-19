@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.textSecondary,
     fontSize: Typography.sm,
+    lineHeight: Typography.lineHeightSm,
     fontFamily: FontFamily.Medium,
     marginBottom: 2,
   },
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
   timestamp: {
     color: Colors.textMuted,
     fontSize: 10,
+    lineHeight: 14,
     fontFamily: FontFamily.Medium,
   },
 });
