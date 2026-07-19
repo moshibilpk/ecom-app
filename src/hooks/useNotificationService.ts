@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Platform } from "react-native";
+import { Platform, DeviceEventEmitter } from "react-native";
 import {
   getMessaging,
   getToken,
@@ -44,6 +44,7 @@ export function useNotificationService() {
   useEffect(() => {
     let unsubscribeMessage: (() => void) | undefined;
     let unsubscribeTokenRefresh: (() => void) | undefined;
+    let emitterSubscription: { remove: () => void } | undefined;
 
     async function bootstrap() {
       if (!userId) {
@@ -102,6 +103,31 @@ export function useNotificationService() {
         console.log("[FCM] Token refreshed:", newToken);
         await registerDeviceToken(userId, newToken);
       });
+
+      // ── 5. Emitter listener for background messages ──────
+      emitterSubscription = DeviceEventEmitter.addListener(
+        "fcm_background_message",
+        (remoteMessage) => {
+          console.log("[FCM] Received background message via emitter:", remoteMessage);
+          const { notification, data, messageId } = remoteMessage;
+          const title = notification?.title;
+          const body = notification?.body;
+          if (!title || !body) return;
+          const type = (data?.type as "order" | "promo" | "system") ?? "system";
+          const id = messageId ?? `fcm-${Date.now()}`;
+
+          dispatch(
+            addNotification({
+              id,
+              title,
+              body,
+              timestamp: Date.now(),
+              read: false,
+              type,
+            }),
+          );
+        },
+      );
     }
 
     bootstrap();
@@ -109,6 +135,7 @@ export function useNotificationService() {
     return () => {
       unsubscribeMessage?.();
       unsubscribeTokenRefresh?.();
+      emitterSubscription?.remove();
     };
   }, [dispatch, userId]);
 }
