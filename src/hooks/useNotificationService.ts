@@ -39,13 +39,17 @@ export function useNotificationService() {
   const user = useAppSelector((state) => {
     return state.auth.user;
   });
-  const userId = user?.uid || "anonymous";
+  const userId = user?.uid;
 
   useEffect(() => {
     let unsubscribeMessage: (() => void) | undefined;
     let unsubscribeTokenRefresh: (() => void) | undefined;
 
     async function bootstrap() {
+      if (!userId) {
+        console.log("[FCM] No user logged in, skipping setup");
+        return;
+      }
       const messaging = getMessaging();
 
       // ── 1. Request permissions ──────────────────────────
