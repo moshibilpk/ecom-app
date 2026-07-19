@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constants";
 import { Notification } from "@models";
@@ -21,10 +22,10 @@ function formatTimeAgo(timestamp: number, t: any): string {
   return t("daysAgo", { count: days });
 }
 
-const TYPE_ICONS: Record<string, string> = {
-  order: "📦",
-  promo: "🎁",
-  system: "🔔",
+const TYPE_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
+  order: "cube-outline",
+  promo: "gift-outline",
+  system: "notifications-outline",
 };
 
 export const NotificationItem = React.memo(function NotificationItem({
@@ -48,7 +49,11 @@ export const NotificationItem = React.memo(function NotificationItem({
 
       {/* Icon */}
       <View style={[styles.iconCircle, !notification.read && styles.iconCircleUnread]}>
-        <Text style={styles.iconText}>{TYPE_ICONS[notification.type || "system"]}</Text>
+        <Ionicons
+          name={TYPE_ICONS[notification.type || "system"]}
+          size={22}
+          color={notification.read ? Colors.textSecondary : Colors.primary}
+        />
       </View>
 
       {/* Content */}
@@ -106,9 +111,6 @@ const styles = StyleSheet.create({
   iconCircleUnread: {
     backgroundColor: "rgba(0, 212, 170, 0.1)",
     borderColor: "rgba(0, 212, 170, 0.3)",
-  },
-  iconText: {
-    fontSize: 20,
   },
   content: {
     flex: 1,

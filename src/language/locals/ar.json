@@ -63,5 +63,8 @@
   "joinExperience": "انضم إلى تجربة التسوق المميزة",
   "username": "اسم المستخدم",
   "haveAccountPrompt": "لديك حساب بالفعل؟",
-  "login": "تسجيل الدخول"
+  "login": "تسجيل الدخول",
+  "emailPlaceholder": "example@email.com",
+  "passwordPlaceholder": "أدخل كلمة المرور",
+  "usernamePlaceholder": "أدخل اسم المستخدم"
 }

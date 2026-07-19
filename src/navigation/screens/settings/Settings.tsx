@@ -1,6 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AnimatedPressable, GradientButton } from "@components";
 import {
@@ -42,7 +43,12 @@ export function Settings() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("generalSettings")}</Text>
           <AnimatedPressable style={styles.settingRow} onPress={onSelectLanguage}>
-            <Text style={styles.settingIcon}>🌐</Text>
+            <Ionicons
+              name="globe-outline"
+              size={22}
+              color={Colors.primary}
+              style={{ marginEnd: Spacing.md }}
+            />
             <Text style={styles.settingLabel}>{t("language")}</Text>
             <Text style={styles.chevronValue}>{currentLanguageName}</Text>
             <Text style={styles.chevron}> › </Text>
@@ -52,7 +58,8 @@ export function Settings() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t("developerTools")}</Text>
           <GradientButton
-            title={"🔔 " + t("sendTestNotification")}
+            icon={<Ionicons name="notifications-outline" size={20} color={Colors.textInverse} />}
+            title={t("sendTestNotification")}
             onPress={handleSendTestNotification}
             variant="secondary"
             size="md"
@@ -135,10 +142,6 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sm,
     borderWidth: 1,
     borderColor: Colors.border,
-  },
-  settingIcon: {
-    fontSize: 20,
-    marginEnd: Spacing.md,
   },
   settingLabel: {
     flex: 1,

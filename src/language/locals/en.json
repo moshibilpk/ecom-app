@@ -63,5 +63,8 @@
   "joinExperience": "Join the premium shopping experience",
   "username": "Username",
   "haveAccountPrompt": "Already have an account?",
-  "login": "Login"
+  "login": "Login",
+  "emailPlaceholder": "example@email.com",
+  "passwordPlaceholder": "Enter your password",
+  "usernamePlaceholder": "Enter your username"
 }

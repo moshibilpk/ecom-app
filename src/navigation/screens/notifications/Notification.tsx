@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { FlatList, Platform, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { NotificationItem } from "@components";
+import { Ionicons } from "@expo/vector-icons";
 import { Colors, FontFamily, Spacing, Typography } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";
 import {
@@ -35,7 +36,12 @@ export function Notification() {
     return (
       <View style={[styles.container, styles.emptyContainer]}>
         <StatusBar barStyle="light-content" />
-        <Text style={styles.emptyIcon}>🔔</Text>
+        <Ionicons
+          name="notifications-outline"
+          size={72}
+          color={Colors.textMuted}
+          style={{ marginBottom: Spacing.lg }}
+        />
         <Text style={styles.emptyTitle}>{t("noNotificationsTitle")}</Text>
         <Text style={styles.emptySubtitle}>{t("noNotificationsSubtitle")}</Text>
       </View>
@@ -82,10 +88,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: Spacing.xl,
-  },
-  emptyIcon: {
-    fontSize: 64,
-    marginBottom: Spacing.lg,
   },
   emptyTitle: {
     fontSize: Typography.xl,

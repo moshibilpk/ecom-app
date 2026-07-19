@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { CartItemRow, GradientButton } from "@components";
+import { Ionicons } from "@expo/vector-icons";
 import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "@constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useCart } from "./useCart";
@@ -14,7 +15,12 @@ export function CartScreen() {
     return (
       <View style={[styles.container, styles.emptyContainer]}>
         <StatusBar barStyle="light-content" />
-        <Text style={styles.emptyIcon}>🛒</Text>
+        <Ionicons
+          name="cart-outline"
+          size={72}
+          color={Colors.textMuted}
+          style={{ marginBottom: Spacing.lg }}
+        />
         <Text style={styles.emptyTitle}>{t("emptyCartTitle")}</Text>
         <Text style={styles.emptySubtitle}>{t("emptyCartSubtitle")}</Text>
       </View>
@@ -75,10 +81,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: Spacing.xl,
-  },
-  emptyIcon: {
-    fontSize: 64,
-    marginBottom: Spacing.lg,
   },
   emptyTitle: {
     fontSize: Typography.xl,

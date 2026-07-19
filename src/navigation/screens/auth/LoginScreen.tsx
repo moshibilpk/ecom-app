@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { Animated, Keyboard, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { GradientButton, InputField } from "@components";
 import {
@@ -83,7 +84,7 @@ export function LoginScreen() {
           <LinearGradient
             colors={["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"]}
             style={styles.iconGradient}>
-            <Text style={styles.iconText}>🛍️</Text>
+            <Ionicons name="bag-handle" size={44} color={Colors.primary} />
           </LinearGradient>
           <View style={styles.glowRing} />
         </Animated.View>
@@ -93,6 +94,7 @@ export function LoginScreen() {
 
         <View style={styles.form}>
           <InputField
+            placeholder={t("emailPlaceholder")}
             label={t("email")}
             value={email}
             onChangeText={setEmail}
@@ -104,6 +106,7 @@ export function LoginScreen() {
           />
 
           <InputField
+            placeholder={t("passwordPlaceholder")}
             label={t("password")}
             value={password}
             onChangeText={setPassword}
@@ -111,7 +114,13 @@ export function LoginScreen() {
             secureTextEntry={!showPassword}
             autoCapitalize="none"
             textContentType="password"
-            rightIcon={<Text style={styles.eyeIcon}>{showPassword ? "👁️" : "🔒"}</Text>}
+            rightIcon={
+              <Ionicons
+                name={showPassword ? "eye-outline" : "eye-off-outline"}
+                size={22}
+                color={Colors.textSecondary}
+              />
+            }
             onRightIconPress={() => setShowPassword(!showPassword)}
           />
 
@@ -167,9 +176,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "rgba(0, 212, 170, 0.3)",
   },
-  iconText: {
-    fontSize: 44,
-  },
   glowRing: {
     position: "absolute",
     top: -6,
@@ -196,9 +202,6 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "100%",
-  },
-  eyeIcon: {
-    fontSize: 20,
   },
   buttonContainer: {
     marginTop: Spacing.lg,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FlatList, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { Ionicons } from "@expo/vector-icons";
 import { AnimatedPressable, CategoryList, ProductCard } from "@components";
 import {
   PRODUCTS,
@@ -34,7 +35,7 @@ export function Home({ navigation }: any) {
           <Text style={styles.subGreeting}>{user?.email || t("welcomeToShopLux")}</Text>
         </View>
         <AnimatedPressable style={styles.cartButton} onPress={() => navigation.navigate("Cart")}>
-          <Text style={styles.cartIcon}>🛒</Text>
+          <Ionicons name="cart" size={24} color={Colors.primary} />
           {cartCount > 0 && (
             <View style={styles.cartBadge}>
               <Text style={styles.cartBadgeText}>{cartCount > 99 ? "99+" : cartCount}</Text>
@@ -115,9 +116,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     position: "relative",
     ...Shadows.sm,
-  },
-  cartIcon: {
-    fontSize: 22,
   },
   cartBadge: {
     position: "absolute",

@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { Animated, Keyboard, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { GradientButton } from "@components/GradientButton";
 import { InputField } from "@components/InputField";
@@ -96,7 +97,7 @@ export function SignupScreen() {
           <LinearGradient
             colors={["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"]}
             style={styles.iconGradient}>
-            <Text style={styles.iconText}>👤</Text>
+            <Ionicons name="person" size={44} color={Colors.primary} />
             <View style={styles.plusBadge}>
               <Text style={styles.plusText}>+</Text>
             </View>
@@ -113,6 +114,7 @@ export function SignupScreen() {
         <View style={styles.form}>
           <InputField
             label={t("email")}
+            placeholder={t("emailPlaceholder")}
             value={email}
             onChangeText={setEmail}
             error={errors.email}
@@ -124,6 +126,7 @@ export function SignupScreen() {
 
           <InputField
             label={t("username")}
+            placeholder={t("usernamePlaceholder")}
             value={username}
             onChangeText={setUsername}
             error={errors.username}
@@ -134,13 +137,20 @@ export function SignupScreen() {
 
           <InputField
             label={t("password")}
+            placeholder={t("passwordPlaceholder")}
             value={password}
             onChangeText={setPassword}
             error={errors.password}
             secureTextEntry={!showPassword}
             autoCapitalize="none"
             textContentType="newPassword"
-            rightIcon={<Text style={styles.eyeIcon}>{showPassword ? "👁️" : "🔒"}</Text>}
+            rightIcon={
+              <Ionicons
+                name={showPassword ? "eye-outline" : "eye-off-outline"}
+                size={22}
+                color={Colors.textSecondary}
+              />
+            }
             onRightIconPress={() => setShowPassword(!showPassword)}
           />
 
@@ -196,9 +206,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "rgba(0, 212, 170, 0.3)",
   },
-  iconText: {
-    fontSize: 44,
-  },
   plusBadge: {
     position: "absolute",
     top: 6,
@@ -242,9 +249,6 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "100%",
-  },
-  eyeIcon: {
-    fontSize: 20,
   },
   buttonContainer: {
     marginTop: Spacing.lg,

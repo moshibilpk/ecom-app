@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "@constants";
 import { Product } from "@models";
@@ -39,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.description}
         </Text>
         <View style={styles.ratingRow}>
-          <Text style={styles.star}>⭐</Text>
+          <Ionicons name="star" size={14} color="#FFC107" />
           <Text style={styles.rating}>{product.rating}</Text>
           <Text style={styles.reviews}>({product.reviewCount})</Text>
         </View>
@@ -125,9 +126,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: Spacing.sm,
     gap: 2,
-  },
-  star: {
-    fontSize: 12,
   },
   rating: {
     color: Colors.secondary,

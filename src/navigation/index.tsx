@@ -5,7 +5,7 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Text } from "@react-navigation/elements";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -13,8 +13,7 @@ import { useTranslation } from "react-i18next";
 import { persistor, store, useAppSelector } from "@store";
 import { Colors, Typography } from "@constants/theme";
 import { ScreenName } from "@constants/ScreenNames";
-import bell from "@assets/bell.png";
-import newspaper from "@assets/newspaper.png";
+import { Ionicons } from "@expo/vector-icons";
 import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } from "./screens";
 import { selectCartItemCount } from "@store/slices/cartSlice";
 import { selectUnreadCount } from "@store/slices/notificationSlice";
@@ -71,7 +70,7 @@ function CartTabIcon({ color, size }: { color: string; size: number }) {
   const count = useAppSelector(selectCartItemCount);
   return (
     <View>
-      <Text style={{ fontSize: size - 4, color }}>🛒</Text>
+      <Ionicons name="cart" size={size} color={color} />
       <TabBadge count={count} />
     </View>
   );
@@ -81,7 +80,7 @@ function NotificationTabIcon({ color, size }: { color: string; size: number }) {
   const count = useAppSelector(selectUnreadCount);
   return (
     <View>
-      <Image source={bell} tintColor={color} style={{ width: size, height: size }} />
+      <Ionicons name="notifications" size={size} color={color} />
       <TabBadge count={count} />
     </View>
   );
@@ -111,9 +110,7 @@ function BottomTabs() {
         component={Home}
         options={{
           title: t("shop"),
-          tabBarIcon: ({ color, size }) => (
-            <Image source={newspaper} tintColor={color} style={{ width: size, height: size }} />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="newspaper" size={size} color={color} />,
         }}
       />
       <Tab.Screen
@@ -137,7 +134,7 @@ function BottomTabs() {
         component={Settings}
         options={{
           title: t("settings"),
-          tabBarIcon: ({ color, size }) => <Text style={{ fontSize: size - 4, color }}>⚙️</Text>,
+          tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
         }}
       />
     </Tab.Navigator>
