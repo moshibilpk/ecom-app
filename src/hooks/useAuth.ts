@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Alert } from "react-native";
 import { auth, getUserFromFirestore, saveUserToFirestore } from "@config/firebase";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "@react-native-firebase/auth";
 import { useAppDispatch, useAppSelector } from "@store";
 import { clearUser, setUser } from "@store/slices/authSlice";
 
@@ -14,7 +19,7 @@ export function useAuth() {
     setLoading(true);
 
     try {
-      const userCredential = await auth().signInWithEmailAndPassword(email.trim(), password);
+      const userCredential = await signInWithEmailAndPassword(auth, email.trim(), password);
       const firebaseUser = userCredential.user;
 
       let username = "User";
@@ -56,7 +61,7 @@ export function useAuth() {
     setLoading(true);
 
     try {
-      const userCredential = await auth().createUserWithEmailAndPassword(email.trim(), password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password);
       const firebaseUser = userCredential.user;
 
       // Store username in Firestore
@@ -96,7 +101,7 @@ export function useAuth() {
   const logout = async (): Promise<boolean> => {
     setLoading(true);
     try {
-      await auth().signOut();
+      await signOut(auth);
       dispatch(clearUser());
       return true;
     } catch (error: any) {

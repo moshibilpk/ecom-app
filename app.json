@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ecom-app",
+    "name": "Ecom",
     "slug": "ecom-app",
     "version": "1.0.0",
     "orientation": "default",
@@ -24,7 +24,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#083131"
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.ecomapp"
@@ -37,7 +37,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#0A3736",
           "image": "./assets/splash-icon.png"
         }
       ],

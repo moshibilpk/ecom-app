@@ -1,8 +1,16 @@
-import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
-import messaging from "@react-native-firebase/messaging";
+import { getAuth } from "@react-native-firebase/auth";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp,
+} from "@react-native-firebase/firestore";
+import { getMessaging } from "@react-native-firebase/messaging";
 
-export { auth, firestore, messaging };
+export const auth = getAuth();
+export const firestore = getFirestore();
+export const messaging = getMessaging();
 
 /**
  * Store user profile (username) in Firestore on signup
@@ -12,12 +20,14 @@ export async function saveUserToFirestore(
   email: string,
   username: string,
 ): Promise<void> {
-  await firestore().collection("users").doc(uid).set(
+  const userRef = doc(firestore, "users", uid);
+  await setDoc(
+    userRef,
     {
       uid,
       email,
       username,
-      createdAt: firestore.FieldValue.serverTimestamp(),
+      createdAt: serverTimestamp(),
     },
     { merge: true },
   );
@@ -27,10 +37,13 @@ export async function saveUserToFirestore(
  * Fetch username from Firestore on login
  */
 export async function getUserFromFirestore(uid: string): Promise<{ username: string } | null> {
-  const doc = await firestore().collection("users").doc(uid).get();
-  const data = doc.data();
-  if (data) {
-    return data as { username: string };
+  const userRef = doc(firestore, "users", uid);
+  const userSnap = await getDoc(userRef);
+  if (userSnap.exists()) {
+    const data = userSnap.data();
+    if (data) {
+      return data as { username: string };
+    }
   }
   return null;
 }

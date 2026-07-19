@@ -1,6 +1,7 @@
 import { Alert } from "react-native";
 import { useTranslation } from "react-i18next";
 import { auth } from "@config/firebase";
+import { signOut } from "@react-native-firebase/auth";
 import { useAppDispatch, useAppSelector } from "@store";
 import { clearUser } from "@store/slices/authSlice";
 import { emptyCart } from "@store/slices/cartSlice";
@@ -33,13 +34,14 @@ export function useSettings() {
         style: "destructive",
         onPress: async () => {
           try {
-            await auth().signOut();
-          } catch {
-            // sign out locally even if Firebase fails
+            await signOut(auth);
+          } catch (error) {
+            console.log("🚀 ~ onLogout ~ error:", error);
+          } finally {
+            dispatch(clearUser());
+            dispatch(emptyCart());
+            dispatch(resetNotifications());
           }
-          dispatch(clearUser());
-          dispatch(emptyCart());
-          dispatch(resetNotifications());
         },
       },
     ]);

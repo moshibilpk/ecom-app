@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AnimatedPressable, GradientButton } from "@components";
 import {
@@ -25,6 +26,9 @@ export function Settings() {
     handleSendTestNotification,
     onSelectLanguage,
   } = useSettings();
+
+  const appName = Constants.expoConfig?.name || "Ecom";
+  const appVersion = Constants.expoConfig?.version || "1.0.0";
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -69,7 +73,9 @@ export function Settings() {
         <View style={styles.logoutContainer}>
           <GradientButton title={t("logout")} onPress={onLogout} variant="danger" size="md" />
         </View>
-        <Text style={styles.version}>{t("version")} ShopLux v1.0.0</Text>
+        <Text style={styles.version}>
+          {t("version")} {appName} v{appVersion}
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
