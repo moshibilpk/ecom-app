@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Animated, Keyboard, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,23 +17,17 @@ import {
 } from "@constants";
 import { resetRoot } from "@utils";
 import { useAuth } from "@hooks";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export function SignupScreen() {
   const { t } = useTranslation();
   const { signup, isLoading } = useAuth();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{
-    email?: string;
-    username?: string;
-    password?: string;
-  }>({});
 
   // Floating icon animation
   const [floatAnim] = React.useState(() => new Animated.Value(0));
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.loop(
       Animated.sequence([
         Animated.timing(floatAnim, {
@@ -50,42 +44,32 @@ export function SignupScreen() {
     ).start();
   }, [floatAnim]);
 
-  const validate = (): boolean => {
-    const newErrors: {
-      email?: string;
-      username?: string;
-      password?: string;
-    } = {};
+  // Yup validation schema
+  const signupSchema = useMemo(() => {
+    return Yup.object().shape({
+      email: Yup.string().trim().required(t("emailRequired")).email(t("emailInvalid")),
+      username: Yup.string()
+        .trim()
+        .required(t("usernameRequired"))
+        .min(3, t("usernameMinLength"))
+        .matches(/^[a-zA-Z0-9_]+$/, t("usernameInvalid")),
+      password: Yup.string().required(t("passwordRequired")).min(6, t("passwordMinLength")),
+    });
+  }, [t]);
 
-    if (!email.trim()) {
-      newErrors.email = t("emailRequired");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      newErrors.email = t("emailInvalid");
-    }
-
-    if (!username.trim()) {
-      newErrors.username = t("usernameRequired");
-    } else if (username.trim().length < 3) {
-      newErrors.username = t("usernameMinLength");
-    } else if (!/^[a-zA-Z0-9_]+$/.test(username.trim())) {
-      newErrors.username = t("usernameInvalid");
-    }
-
-    if (!password) {
-      newErrors.password = t("passwordRequired");
-    } else if (password.length < 6) {
-      newErrors.password = t("passwordMinLength");
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSignup = async () => {
-    if (!validate()) return;
-    Keyboard.dismiss();
-    await signup(email, username, password);
-  };
+  // Formik configuration
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      username: "",
+      password: "",
+    },
+    validationSchema: signupSchema,
+    onSubmit: async (values) => {
+      Keyboard.dismiss();
+      await signup(values.email, values.username, values.password);
+    },
+  });
 
   return (
     <View style={styles.root}>
@@ -120,9 +104,10 @@ export function SignupScreen() {
           <InputField
             label={t("email")}
             placeholder={t("emailPlaceholder")}
-            value={email}
-            onChangeText={setEmail}
-            error={errors.email}
+            value={formik.values.email}
+            onChangeText={formik.handleChange("email")}
+            onBlur={formik.handleBlur("email")}
+            error={formik.touched.email ? formik.errors.email : undefined}
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
@@ -132,9 +117,10 @@ export function SignupScreen() {
           <InputField
             label={t("username")}
             placeholder={t("usernamePlaceholder")}
-            value={username}
-            onChangeText={setUsername}
-            error={errors.username}
+            value={formik.values.username}
+            onChangeText={formik.handleChange("username")}
+            onBlur={formik.handleBlur("username")}
+            error={formik.touched.username ? formik.errors.username : undefined}
             autoCapitalize="none"
             autoCorrect={false}
             textContentType="username"
@@ -143,9 +129,10 @@ export function SignupScreen() {
           <InputField
             label={t("password")}
             placeholder={t("passwordPlaceholder")}
-            value={password}
-            onChangeText={setPassword}
-            error={errors.password}
+            value={formik.values.password}
+            onChangeText={formik.handleChange("password")}
+            onBlur={formik.handleBlur("password")}
+            error={formik.touched.password ? formik.errors.password : undefined}
             secureTextEntry={!showPassword}
             autoCapitalize="none"
             textContentType="newPassword"
@@ -162,7 +149,7 @@ export function SignupScreen() {
           <View style={styles.buttonContainer}>
             <GradientButton
               title={t("createAccount")}
-              onPress={handleSignup}
+              onPress={formik.handleSubmit as any}
               loading={isLoading}
               disabled={isLoading}
               size="lg"

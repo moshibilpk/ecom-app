@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Animated, Keyboard, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { Ionicons } from "@expo/vector-icons";
@@ -17,18 +17,18 @@ import {
 } from "@constants";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useAuth } from "@hooks";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export function LoginScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
   const { login, isLoading } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
+  // Floating icon animation
   const [floatAnim] = React.useState(() => new Animated.Value(0));
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.loop(
       Animated.sequence([
         Animated.timing(floatAnim, {
@@ -45,30 +45,26 @@ export function LoginScreen() {
     ).start();
   }, [floatAnim]);
 
-  const validate = (): boolean => {
-    const newErrors: { email?: string; password?: string } = {};
+  // Yup validation schema
+  const loginSchema = useMemo(() => {
+    return Yup.object().shape({
+      email: Yup.string().trim().required(t("emailRequired")).email(t("emailInvalid")),
+      password: Yup.string().required(t("passwordRequired")).min(6, t("passwordMinLength")),
+    });
+  }, [t]);
 
-    if (!email.trim()) {
-      newErrors.email = t("emailRequired");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      newErrors.email = t("emailInvalid");
-    }
-
-    if (!password) {
-      newErrors.password = t("passwordRequired");
-    } else if (password.length < 6) {
-      newErrors.password = t("passwordMinLength");
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleLogin = async () => {
-    if (!validate()) return;
-    Keyboard.dismiss();
-    await login(email, password);
-  };
+  // Formik configuration
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      Keyboard.dismiss();
+      await login(values.email, values.password);
+    },
+  });
 
   return (
     <View style={styles.root}>
@@ -96,9 +92,10 @@ export function LoginScreen() {
           <InputField
             placeholder={t("emailPlaceholder")}
             label={t("email")}
-            value={email}
-            onChangeText={setEmail}
-            error={errors.email}
+            value={formik.values.email}
+            onChangeText={formik.handleChange("email")}
+            onBlur={formik.handleBlur("email")}
+            error={formik.touched.email ? formik.errors.email : undefined}
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
@@ -108,9 +105,10 @@ export function LoginScreen() {
           <InputField
             placeholder={t("passwordPlaceholder")}
             label={t("password")}
-            value={password}
-            onChangeText={setPassword}
-            error={errors.password}
+            value={formik.values.password}
+            onChangeText={formik.handleChange("password")}
+            onBlur={formik.handleBlur("password")}
+            error={formik.touched.password ? formik.errors.password : undefined}
             secureTextEntry={!showPassword}
             autoCapitalize="none"
             textContentType="password"
@@ -127,7 +125,7 @@ export function LoginScreen() {
           <View style={styles.buttonContainer}>
             <GradientButton
               title={t("signIn")}
-              onPress={handleLogin}
+              onPress={formik.handleSubmit as any}
               loading={isLoading}
               disabled={isLoading}
               size="lg"
