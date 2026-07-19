@@ -4,17 +4,22 @@ import { Animated, Keyboard, Pressable, StatusBar, StyleSheet, Text, View } from
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-import { GradientButton } from "@components/GradientButton";
-import { InputField } from "@components/InputField";
-import { BorderRadius, Colors, Gradients, Shadows, Spacing, Typography } from "@constants/theme";
-import { ScreenName } from "@constants/ScreenNames";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useAuth } from "@hooks/useAuth";
-import { FontFamily } from "@constants";
+import { GradientButton, InputField } from "@components";
+import {
+  BorderRadius,
+  Colors,
+  Gradients,
+  Shadows,
+  Spacing,
+  Typography,
+  ScreenName,
+  FontFamily,
+} from "@constants";
+import { resetRoot } from "@utils";
+import { useAuth } from "@hooks";
 
 export function SignupScreen() {
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
   const { signup, isLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -168,7 +173,7 @@ export function SignupScreen() {
         {/* Bottom Link */}
         <View style={styles.bottomLink}>
           <Text style={styles.bottomText}>{t("haveAccountPrompt")} </Text>
-          <Pressable onPress={() => navigation.navigate(ScreenName.Login)}>
+          <Pressable onPress={() => resetRoot(ScreenName.Login)}>
             <Text style={styles.linkText}>{t("login")}</Text>
           </Pressable>
         </View>

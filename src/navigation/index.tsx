@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { createNavigationContainerRef, NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   BottomTabNavigationOptions,
@@ -11,17 +11,16 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { useTranslation } from "react-i18next";
 import { persistor, store, useAppSelector } from "@store";
-import { Colors, Typography } from "@constants/theme";
-import { ScreenName } from "@constants/ScreenNames";
+import { Colors, FontFamily, ScreenName } from "@constants";
 import { Ionicons } from "@expo/vector-icons";
 import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } from "./screens";
 import { selectCartItemCount } from "@store/slices/cartSlice";
 import { selectUnreadCount } from "@store/slices/notificationSlice";
-import { useNotificationService } from "@hooks/useNotificationService";
-import { FontFamily } from "@constants";
+import { useNotificationService } from "@hooks";
 import { LanguageProvider } from "@components";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import "@language/i18n";
+import { navigationRef } from "@utils/navigation";
 
 // ──────────────────────────────────────────────
 // Navigators
@@ -29,10 +28,7 @@ import "@language/i18n";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-/** Exported ref for imperative navigation outside of components */
-export const navigationRef = createNavigationContainerRef<Record<ScreenName, undefined>>();
-
-const screenOptions = { headerShown: false };
+export { navigationRef, resetRoot, navigate } from "@utils/navigation";
 
 // ──────────────────────────────────────────────
 // Badge Component for tab bar icons
@@ -148,7 +144,11 @@ function RootNavigator() {
   useNotificationService();
 
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        animation: "ios_from_right",
+      }}>
       {isAuthenticated ? (
         <Fragment>
           <Stack.Screen name={ScreenName.HomeTabs} component={BottomTabs} />
