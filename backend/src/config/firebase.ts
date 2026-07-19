@@ -11,7 +11,7 @@ let app: App;
 if (!getApps().length) {
   const serviceAccountPath = path.resolve(
     process.cwd(),
-    process.env.GOOGLE_APPLICATION_CREDENTIALS ?? "./serviceAccountKey.json",
+    JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT!) ?? "./serviceAccountKey.json",
   );
 
   app = initializeApp({
