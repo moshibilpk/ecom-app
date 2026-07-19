@@ -21,6 +21,7 @@ import { selectUnreadCount } from "@store/slices/notificationSlice";
 import { useNotificationService } from "@hooks/useNotificationService";
 import { FontFamily } from "@constants";
 import { LanguageProvider } from "@components";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import "@language/i18n";
 
 // ──────────────────────────────────────────────
@@ -170,13 +171,15 @@ export function Navigation(props: { linking: any; onReady: () => void; theme?: a
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <LanguageProvider>
-          <NavigationContainer
-            ref={navigationRef}
-            linking={props.linking}
-            onReady={props.onReady}
-            theme={props.theme}>
-            <RootNavigator />
-          </NavigationContainer>
+          <KeyboardProvider>
+            <NavigationContainer
+              ref={navigationRef}
+              linking={props.linking}
+              onReady={props.onReady}
+              theme={props.theme}>
+              <RootNavigator />
+            </NavigationContainer>
+          </KeyboardProvider>
         </LanguageProvider>
       </PersistGate>
     </Provider>

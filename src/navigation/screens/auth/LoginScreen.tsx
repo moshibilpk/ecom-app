@@ -1,18 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import {
-  Animated,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Animated, Keyboard, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useTranslation } from "react-i18next";
 import { GradientButton, InputField } from "@components";
 import {
@@ -84,72 +73,67 @@ export function LoginScreen() {
     <View style={styles.root}>
       <StatusBar barStyle="light-content" />
       <LinearGradient colors={Gradients.background} style={StyleSheet.absoluteFill} />
-      <KeyboardAvoidingView
+      <KeyboardAwareScrollView
         style={styles.flex}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled">
-            <Animated.View
-              style={[styles.iconContainer, { transform: [{ translateY: floatAnim }] }]}>
-              <LinearGradient
-                colors={["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"]}
-                style={styles.iconGradient}>
-                <Text style={styles.iconText}>🛍️</Text>
-              </LinearGradient>
-              <View style={styles.glowRing} />
-            </Animated.View>
+        bottomOffset={15}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled">
+        <Animated.View style={[styles.iconContainer, { transform: [{ translateY: floatAnim }] }]}>
+          <LinearGradient
+            colors={["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"]}
+            style={styles.iconGradient}>
+            <Text style={styles.iconText}>🛍️</Text>
+          </LinearGradient>
+          <View style={styles.glowRing} />
+        </Animated.View>
 
-            <Text style={styles.title}>{t("welcomeBack")}</Text>
-            <Text style={styles.subtitle}>{t("signInContinue")}</Text>
+        <Text style={styles.title}>{t("welcomeBack")}</Text>
+        <Text style={styles.subtitle}>{t("signInContinue")}</Text>
 
-            <View style={styles.form}>
-              <InputField
-                label={t("email")}
-                value={email}
-                onChangeText={setEmail}
-                error={errors.email}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                textContentType="emailAddress"
-              />
+        <View style={styles.form}>
+          <InputField
+            label={t("email")}
+            value={email}
+            onChangeText={setEmail}
+            error={errors.email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            textContentType="emailAddress"
+          />
 
-              <InputField
-                label={t("password")}
-                value={password}
-                onChangeText={setPassword}
-                error={errors.password}
-                secureTextEntry={!showPassword}
-                autoCapitalize="none"
-                textContentType="password"
-                rightIcon={<Text style={styles.eyeIcon}>{showPassword ? "👁️" : "🔒"}</Text>}
-                onRightIconPress={() => setShowPassword(!showPassword)}
-              />
+          <InputField
+            label={t("password")}
+            value={password}
+            onChangeText={setPassword}
+            error={errors.password}
+            secureTextEntry={!showPassword}
+            autoCapitalize="none"
+            textContentType="password"
+            rightIcon={<Text style={styles.eyeIcon}>{showPassword ? "👁️" : "🔒"}</Text>}
+            onRightIconPress={() => setShowPassword(!showPassword)}
+          />
 
-              <View style={styles.buttonContainer}>
-                <GradientButton
-                  title={t("signIn")}
-                  onPress={handleLogin}
-                  loading={isLoading}
-                  disabled={isLoading}
-                  size="lg"
-                />
-              </View>
-            </View>
+          <View style={styles.buttonContainer}>
+            <GradientButton
+              title={t("signIn")}
+              onPress={handleLogin}
+              loading={isLoading}
+              disabled={isLoading}
+              size="lg"
+            />
+          </View>
+        </View>
 
-            {/* Bottom Link */}
-            <View style={styles.bottomLink}>
-              <Text style={styles.bottomText}>{t("noAccountPrompt")} </Text>
-              <Pressable onPress={() => navigation.navigate(ScreenName.Signup)}>
-                <Text style={styles.linkText}>{t("signUp")}</Text>
-              </Pressable>
-            </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+        {/* Bottom Link */}
+        <View style={styles.bottomLink}>
+          <Text style={styles.bottomText}>{t("noAccountPrompt")} </Text>
+          <Pressable onPress={() => navigation.navigate(ScreenName.Signup)}>
+            <Text style={styles.linkText}>{t("signUp")}</Text>
+          </Pressable>
+        </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 }
