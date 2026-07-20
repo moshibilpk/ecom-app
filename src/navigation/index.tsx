@@ -111,18 +111,12 @@ function BottomTabs() {
       <Tab.Screen
         name={ScreenName.Cart}
         component={CartScreen}
-        options={{
-          title: t("cart"),
-          tabBarIcon: CartTabIcon,
-        }}
+        options={{ title: t("cart"), tabBarIcon: CartTabIcon }}
       />
       <Tab.Screen
         name={ScreenName.Notification}
         component={Notification}
-        options={{
-          title: t("notifications"),
-          tabBarIcon: NotificationTabIcon,
-        }}
+        options={{ title: t("notifications"), tabBarIcon: NotificationTabIcon }}
       />
       <Tab.Screen
         name={ScreenName.Settings}
@@ -143,11 +137,7 @@ function RootNavigator() {
   useNotificationService();
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        animation: "ios_from_right",
-      }}>
+    <Stack.Navigator screenOptions={{ headerShown: false, animation: "ios_from_right" }}>
       {isAuthenticated ? (
         <Fragment>
           <Stack.Screen name={ScreenName.HomeTabs} component={BottomTabs} />

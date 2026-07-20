@@ -3,7 +3,7 @@ import { FlatList, Platform, Pressable, StatusBar, StyleSheet, Text, View } from
 import { useTranslation } from "react-i18next";
 import { EmptyState } from "@components/ui";
 import { NotificationItem } from "@components/notification";
-import { Colors, FontFamily, Spacing, Typography } from "@constants";
+import { Colors, FontFamily, ItemSizes, Spacing, Typography } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";
 import {
   markAllAsRead,
@@ -23,8 +23,8 @@ export function Notification() {
   }, []);
 
   const getItemLayout = useCallback((_: unknown, index: number) => {
-    const itemHeight = 94;
-    const itemMargin = 8;
+    const itemHeight = ItemSizes.notificationItemHeight;
+    const itemMargin = Spacing.sm;
     return {
       length: itemHeight + itemMargin,
       offset: (itemHeight + itemMargin) * index,
@@ -54,7 +54,7 @@ export function Notification() {
         initialNumToRender={12}
         maxToRenderPerBatch={12}
         windowSize={5}
-        removeClippedSubviews={Platform.OS === "android"}
+        removeClippedSubviews
         getItemLayout={getItemLayout}
         ListHeaderComponent={
           <View style={styles.headerRow}>

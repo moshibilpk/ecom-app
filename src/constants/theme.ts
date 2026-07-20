@@ -165,6 +165,11 @@ export const AnimationDuration = {
   slow: 400,
 } as const;
 
+export const ItemSizes = {
+  productCardHeight: 325,
+  notificationItemHeight: 94,
+} as const;
+
 export default {
   Colors,
   Gradients,
@@ -173,4 +178,5 @@ export default {
   Typography,
   Shadows,
   AnimationDuration,
+  ItemSizes,
 };

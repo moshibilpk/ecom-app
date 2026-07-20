@@ -31,11 +31,5 @@ export function App() {
     );
   }
 
-  return (
-    <Navigation
-      onReady={() => {
-        SplashScreen.hideAsync();
-      }}
-    />
-  );
+  return <Navigation onReady={() => SplashScreen.hideAsync()} />;
 }

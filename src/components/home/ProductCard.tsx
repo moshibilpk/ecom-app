@@ -2,7 +2,15 @@ import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "@constants";
+import {
+  BorderRadius,
+  Colors,
+  FontFamily,
+  ItemSizes,
+  Shadows,
+  Spacing,
+  Typography,
+} from "@constants";
 import { Product } from "@models";
 import { useAppDispatch, useAppSelector } from "@store";
 import { addToCart, decrementQuantity, incrementQuantity } from "@store/slices/cartSlice";
@@ -80,6 +88,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.border,
     ...Shadows.sm,
+    height: ItemSizes.productCardHeight,
   },
   imageContainer: {
     width: "100%",

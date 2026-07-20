@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-import { BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constants";
+import { BorderRadius, Colors, FontFamily, ItemSizes, Spacing, Typography } from "@constants";
 import { Notification } from "@models";
 import { useAppDispatch } from "@store";
 import { markAsRead } from "@store/slices/notificationSlice";
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.border,
     position: "relative",
-    height: 94,
+    height: ItemSizes.notificationItemHeight,
   },
   unreadContainer: {
     borderStartWidth: 3,

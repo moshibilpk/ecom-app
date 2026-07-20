@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Ionicons } from "@expo/vector-icons";
@@ -8,6 +8,7 @@ import {
   BorderRadius,
   Colors,
   FontFamily,
+  ItemSizes,
   Shadows,
   Spacing,
   Typography,
@@ -25,6 +26,24 @@ export function Home({ navigation }: any) {
 
   const filteredProducts =
     selectedCategory === "All" ? PRODUCTS : PRODUCTS.filter((p) => p.category === selectedCategory);
+
+  const renderItem = useCallback(
+    ({ item }: { item: (typeof PRODUCTS)[number] }) => (
+      <View style={styles.columnItem}>
+        <ProductCard product={item} />
+      </View>
+    ),
+    [],
+  );
+
+  const getItemLayout = useCallback((_: unknown, index: number) => {
+    const itemHeight = ItemSizes.productCardHeight;
+    return {
+      length: itemHeight + Spacing.xs,
+      offset: (itemHeight + Spacing.xs) * index,
+      index,
+    };
+  }, []);
 
   const renderHeader = () => (
     <View style={styles.header}>
@@ -59,11 +78,12 @@ export function Home({ navigation }: any) {
         keyExtractor={(item) => item.id}
         numColumns={2}
         ListHeaderComponent={renderHeader}
-        renderItem={({ item }) => (
-          <View style={styles.columnItem}>
-            <ProductCard product={item} />
-          </View>
-        )}
+        renderItem={renderItem}
+        getItemLayout={getItemLayout}
+        initialNumToRender={6}
+        maxToRenderPerBatch={6}
+        windowSize={5}
+        removeClippedSubviews
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={styles.columnWrapper}
