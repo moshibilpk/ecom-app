@@ -6,7 +6,7 @@ import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "
 import { Product } from "@models";
 import { useAppDispatch, useAppSelector } from "@store";
 import { addToCart, decrementQuantity, incrementQuantity } from "@store/slices/cartSlice";
-import { AnimatedPressable } from "./AnimatedPressable";
+import { AnimatedPressable } from "@components/ui";
 
 interface ProductCardProps {
   product: Product;

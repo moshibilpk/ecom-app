@@ -5,7 +5,7 @@ import { BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constant
 import { CartItem as CartItemType } from "@models";
 import { useAppDispatch } from "@store";
 import { decrementQuantity, incrementQuantity, removeFromCart } from "@store/slices/cartSlice";
-import { AnimatedPressable } from "./AnimatedPressable";
+import { AnimatedPressable } from "@components/ui";
 
 interface CartItemProps {
   item: CartItemType;

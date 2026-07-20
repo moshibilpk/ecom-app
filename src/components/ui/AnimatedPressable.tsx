@@ -1,5 +1,11 @@
-import { ReactNode, useRef } from "react";
-import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
+import { ReactNode } from "react";
+import {
+  GestureResponderEvent,
+  Pressable,
+  PressableProps,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
 import Animated, {
   WithTimingConfig,
   useAnimatedStyle,
@@ -13,7 +19,7 @@ export interface AnimatedPressableProps extends Omit<PressableProps, "style"> {
   children: ReactNode;
   /**
    * Scale value when pressed (0.0 - 1.0)
-   * @default 0.97
+   * @default 0.95
    */
   scaleValue?: number;
   /**
@@ -36,12 +42,6 @@ export interface AnimatedPressableProps extends Omit<PressableProps, "style"> {
    */
   timingConfig?: WithTimingConfig;
   /**
-   * Minimum milliseconds between successive onPress firings.
-   * Prevents double-tap / rapid-tap from triggering the handler multiple times.
-   * @default 500
-   */
-  throttleMs?: number;
-  /**
    * Style for the pressable container
    */
   style?: StyleProp<ViewStyle>;
@@ -58,7 +58,6 @@ export const AnimatedPressable = ({
   enableScale = true,
   enableOpacity = false,
   timingConfig = defaultTimingConfig,
-  throttleMs = 500,
   style,
   onPressIn,
   onPressOut,
@@ -66,7 +65,6 @@ export const AnimatedPressable = ({
   disabled,
   ...pressableProps
 }: AnimatedPressableProps) => {
-  const lastPressRef = useRef<number>(0);
   const scale = useSharedValue(1);
   const opacity = useSharedValue(1);
 
@@ -77,7 +75,7 @@ export const AnimatedPressable = ({
     };
   });
 
-  const handlePressIn = (event: any) => {
+  const handlePressIn = (event: GestureResponderEvent) => {
     if (enableScale) {
       scale.set(withTiming(scaleValue, timingConfig));
     }
@@ -87,7 +85,7 @@ export const AnimatedPressable = ({
     onPressIn?.(event);
   };
 
-  const handlePressOut = (event: any) => {
+  const handlePressOut = (event: GestureResponderEvent) => {
     if (enableScale) {
       scale.set(withTiming(1, timingConfig));
     }
@@ -97,19 +95,12 @@ export const AnimatedPressable = ({
     onPressOut?.(event);
   };
 
-  const handlePress = (event: any) => {
-    const now = Date.now();
-    if (now - lastPressRef.current < throttleMs) return;
-    lastPressRef.current = now;
-    onPress?.(event);
-  };
-
   return (
     <AnimatedPressableComponent
       {...pressableProps}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
-      onPress={handlePress}
+      onPress={onPress}
       disabled={disabled}
       style={[animatedStyle, style]}>
       {children}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Ionicons } from "@expo/vector-icons";
-import { AnimatedPressable, CategoryList, ProductCard } from "@components";
+import { AnimatedPressable } from "@components/ui";
 import {
   PRODUCTS,
   BorderRadius,
@@ -15,6 +15,7 @@ import {
 import { useAppSelector } from "@store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { selectCartItemCount } from "@store/slices/cartSlice";
+import { CategoryList, ProductCard } from "@components/home";
 
 export function Home({ navigation }: any) {
   const { t } = useTranslation();

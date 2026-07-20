@@ -4,7 +4,7 @@ import { Animated, Keyboard, Pressable, StatusBar, StyleSheet, Text, View } from
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-import { GradientButton, InputField } from "@components";
+import { GradientButton, InputField } from "@components/ui";
 import {
   BorderRadius,
   Colors,

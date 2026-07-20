@@ -17,7 +17,7 @@ import { LoginScreen, SignupScreen, Home, CartScreen, Notification, Settings } f
 import { selectCartItemCount } from "@store/slices/cartSlice";
 import { selectUnreadCount } from "@store/slices/notificationSlice";
 import { useNotificationService } from "@hooks";
-import { LanguageProvider } from "@components";
+import { LanguageProvider } from "@components/provider";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import "@language/i18n";
 import { navigationRef } from "@utils/navigation";

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { CATEGORIES, BorderRadius, Colors, FontFamily, Spacing, Typography } from "@constants";
-import { AnimatedPressable } from "./AnimatedPressable";
+import { AnimatedPressable } from "@components/ui";
 
 // ─── Single chip ─────────────────────────────────────────────────────────────
 function CategoryChip({

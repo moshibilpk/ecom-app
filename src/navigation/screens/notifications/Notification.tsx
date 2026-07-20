@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { FlatList, Platform, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { NotificationItem } from "@components";
+import { NotificationItem } from "@components/notification";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors, FontFamily, Spacing, Typography } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";

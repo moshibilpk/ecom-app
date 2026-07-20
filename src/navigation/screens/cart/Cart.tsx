@@ -1,11 +1,12 @@
 import React from "react";
 import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { CartItemRow, GradientButton } from "@components";
+import { GradientButton } from "@components/ui";
 import { Ionicons } from "@expo/vector-icons";
 import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "@constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useCart } from "./useCart";
+import { CartItemRow } from "@components/cart";
 
 export function CartScreen() {
   const { t } = useTranslation();

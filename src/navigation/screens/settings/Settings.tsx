@@ -4,7 +4,7 @@ import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AnimatedPressable, GradientButton } from "@components";
+import { AnimatedPressable, GradientButton } from "@components/ui";
 import {
   BorderRadius,
   Colors,
