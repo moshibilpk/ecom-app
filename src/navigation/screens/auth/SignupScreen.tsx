@@ -83,9 +83,7 @@ export function SignupScreen() {
         keyboardShouldPersistTaps="handled">
         {/* Logo / Brand Icon */}
         <Animated.View style={[styles.iconContainer, { transform: [{ translateY: floatAnim }] }]}>
-          <LinearGradient
-            colors={["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"]}
-            style={styles.iconGradient}>
+          <LinearGradient colors={Gradients.iconGlow} style={styles.iconGradient}>
             <Ionicons name="person" size={44} color={Colors.primary} />
             <View style={styles.plusBadge}>
               <Text style={styles.plusText}>+</Text>

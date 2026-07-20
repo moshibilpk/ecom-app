@@ -65,7 +65,7 @@ export function useNotificationService() {
       // ── 2. Get and register FCM token ───────────────────
       try {
         const token = await getToken(messaging);
-        console.log("🚀 ~ bootstrap ~ token:", token);
+        // console.log("🚀 ~ bootstrap ~ token:", token);
         if (token) {
           await registerDeviceToken(userId, token);
         }

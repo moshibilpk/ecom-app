@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { FlatList, Platform, Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { EmptyState } from "@components/ui";
 import { NotificationItem } from "@components/notification";
-import { Ionicons } from "@expo/vector-icons";
 import { Colors, FontFamily, Spacing, Typography } from "@constants";
 import { useAppDispatch, useAppSelector } from "@store";
 import {
@@ -34,17 +34,11 @@ export function Notification() {
 
   if (notifications.length === 0) {
     return (
-      <View style={[styles.container, styles.emptyContainer]}>
-        <StatusBar barStyle="light-content" />
-        <Ionicons
-          name="notifications-outline"
-          size={72}
-          color={Colors.textMuted}
-          style={{ marginBottom: Spacing.lg }}
-        />
-        <Text style={styles.emptyTitle}>{t("noNotificationsTitle")}</Text>
-        <Text style={styles.emptySubtitle}>{t("noNotificationsSubtitle")}</Text>
-      </View>
+      <EmptyState
+        iconName="notifications-outline"
+        title={t("noNotificationsTitle")}
+        subtitle={t("noNotificationsSubtitle")}
+      />
     );
   }
 
@@ -83,25 +77,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-  },
-  emptyContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: Spacing.xl,
-  },
-  emptyTitle: {
-    fontSize: Typography.xl,
-    lineHeight: Typography.lineHeightXl,
-    fontFamily: FontFamily.Bold,
-    color: Colors.textPrimary,
-    marginBottom: Spacing.sm,
-  },
-  emptySubtitle: {
-    fontSize: Typography.base,
-    lineHeight: Typography.lineHeightBase,
-    fontFamily: FontFamily.Regular,
-    color: Colors.textSecondary,
-    textAlign: "center",
   },
   listContent: {
     padding: Spacing.base,

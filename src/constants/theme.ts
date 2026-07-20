@@ -61,6 +61,8 @@ export const Colors = {
 export const Gradients = {
   primary: ["#00D4AA", "#0099CC"] as const,
   primaryReverse: ["#0099CC", "#00D4AA"] as const,
+  primarySubtle: ["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"] as const,
+  iconGlow: ["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"] as const,
   secondary: ["#FFB020", "#FF7820"] as const,
   background: ["#0A1628", "#0F2040"] as const,
   card: ["#1A3360", "#0F2040"] as const,

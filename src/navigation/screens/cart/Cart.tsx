@@ -1,8 +1,7 @@
 import React from "react";
 import { FlatList, StatusBar, StyleSheet, Text, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { GradientButton } from "@components/ui";
-import { Ionicons } from "@expo/vector-icons";
+import { EmptyState, GradientButton } from "@components/ui";
 import { BorderRadius, Colors, FontFamily, Shadows, Spacing, Typography } from "@constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useCart } from "./useCart";
@@ -14,17 +13,11 @@ export function CartScreen() {
 
   if (items.length === 0) {
     return (
-      <View style={[styles.container, styles.emptyContainer]}>
-        <StatusBar barStyle="light-content" />
-        <Ionicons
-          name="cart-outline"
-          size={72}
-          color={Colors.textMuted}
-          style={{ marginBottom: Spacing.lg }}
-        />
-        <Text style={styles.emptyTitle}>{t("emptyCartTitle")}</Text>
-        <Text style={styles.emptySubtitle}>{t("emptyCartSubtitle")}</Text>
-      </View>
+      <EmptyState
+        iconName="cart-outline"
+        title={t("emptyCartTitle")}
+        subtitle={t("emptyCartSubtitle")}
+      />
     );
   }
 
@@ -77,25 +70,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
-  },
-  emptyContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: Spacing.xl,
-  },
-  emptyTitle: {
-    fontSize: Typography.xl,
-    lineHeight: Typography.lineHeightXl,
-    fontFamily: FontFamily.Bold,
-    color: Colors.textPrimary,
-    marginBottom: Spacing.sm,
-  },
-  emptySubtitle: {
-    fontSize: Typography.base,
-    lineHeight: Typography.lineHeightBase,
-    fontFamily: FontFamily.Regular,
-    color: Colors.textSecondary,
-    textAlign: "center",
   },
   listContent: {
     padding: Spacing.base,

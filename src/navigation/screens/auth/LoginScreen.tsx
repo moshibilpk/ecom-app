@@ -15,14 +15,13 @@ import {
   ScreenName,
   FontFamily,
 } from "@constants";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useAuth } from "@hooks";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { navigate } from "@utils";
 
 export function LoginScreen() {
   const { t } = useTranslation();
-  const navigation = useNavigation<NavigationProp<Record<ScreenName, unknown>>>();
   const { login, isLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -77,9 +76,7 @@ export function LoginScreen() {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled">
         <Animated.View style={[styles.iconContainer, { transform: [{ translateY: floatAnim }] }]}>
-          <LinearGradient
-            colors={["rgba(0, 212, 170, 0.15)", "rgba(0, 153, 204, 0.08)"]}
-            style={styles.iconGradient}>
+          <LinearGradient colors={Gradients.iconGlow} style={styles.iconGradient}>
             <Ionicons name="bag-handle" size={44} color={Colors.primary} />
           </LinearGradient>
           <View style={styles.glowRing} />
@@ -136,7 +133,7 @@ export function LoginScreen() {
         {/* Bottom Link */}
         <View style={styles.bottomLink}>
           <Text style={styles.bottomText}>{t("noAccountPrompt")} </Text>
-          <Pressable onPress={() => navigation.navigate(ScreenName.Signup)}>
+          <Pressable onPress={() => navigate(ScreenName.Signup)}>
             <Text style={styles.linkText}>{t("signUp")}</Text>
           </Pressable>
         </View>
