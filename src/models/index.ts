@@ -1,3 +1,16 @@
+export interface FirestoreTimestamp {
+  seconds: number;
+  nanoseconds: number;
+  type?: string;
+}
+
+export interface FirestoreUser {
+  uid: string;
+  email: string;
+  username: string;
+  createdAt: FirestoreTimestamp;
+}
+
 export interface User {
   uid: string;
   email: string;

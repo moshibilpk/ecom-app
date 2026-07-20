@@ -28,8 +28,6 @@ import { navigationRef } from "@utils/navigation";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-export { navigationRef, resetRoot, navigate } from "@utils/navigation";
-
 // ──────────────────────────────────────────────
 // Badge Component for tab bar icons
 // ──────────────────────────────────────────────
@@ -164,17 +162,13 @@ function RootNavigator() {
   );
 }
 
-export function Navigation(props: { linking: any; onReady: () => void; theme?: any }) {
+export function Navigation({ onReady }: { onReady: () => void }) {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate persistor={persistor}>
         <LanguageProvider>
           <KeyboardProvider>
-            <NavigationContainer
-              ref={navigationRef}
-              linking={props.linking}
-              onReady={props.onReady}
-              theme={props.theme}>
+            <NavigationContainer ref={navigationRef} onReady={onReady}>
               <RootNavigator />
             </NavigationContainer>
           </KeyboardProvider>

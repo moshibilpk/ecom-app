@@ -125,7 +125,7 @@ export function LoginScreen() {
           <View style={styles.buttonContainer}>
             <GradientButton
               title={t("signIn")}
-              onPress={formik.handleSubmit as any}
+              onPress={formik.handleSubmit}
               loading={isLoading}
               disabled={isLoading}
               size="lg"

@@ -7,6 +7,7 @@ import {
   serverTimestamp,
 } from "@react-native-firebase/firestore";
 import { getMessaging } from "@react-native-firebase/messaging";
+import { FirestoreUser } from "@models";
 
 export const auth = getAuth();
 export const firestore = getFirestore();
@@ -34,15 +35,15 @@ export async function saveUserToFirestore(
 }
 
 /**
- * Fetch username from Firestore on login
+ * Fetch user document from Firestore on login
  */
-export async function getUserFromFirestore(uid: string): Promise<{ username: string } | null> {
+export async function getUserFromFirestore(uid: string): Promise<FirestoreUser | null> {
   const userRef = doc(firestore, "users", uid);
   const userSnap = await getDoc(userRef);
   if (userSnap.exists()) {
     const data = userSnap.data();
     if (data) {
-      return data as { username: string };
+      return data as FirestoreUser;
     }
   }
   return null;
